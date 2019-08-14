@@ -1,0 +1,84 @@
+<div id="smartbox-box"<?php echo (!$this->getSmartboxPickup() ? ' style="display: none;"' : ''); ?>>
+
+    <?php if($this->getSmartboxPickup()): ?>
+        <div style="display: none;">
+            <input name="shipping_method" type="radio" value="<?php echo Mage::helper('Smartbox_Smartboxparcels')->getShippingMethodCode(); ?>" id="s_method_<?php echo Mage::helper('Smartbox_Smartboxparcels')->getShippingMethodCode(); ?>" checked="checked" class="radio" />
+        </div>
+    <?php endif; ?>
+
+    <div class="smartbox-header">
+        <img src="<?php echo $this->getSkinUrl('images/smartbox/smartboxparcels/logo.png'); ?>" class="smartbox-logo" />
+
+        <?php if($aboutInformation = $this->getAboutInformation()): ?>
+        <span class="smartbox-more-info-control">
+        <span class="smartbox-info-icon">i</span>
+        <span class="smartbox-more-info"> <?php echo $aboutInformation; ?></span>
+    </span>
+            
+        <?php endif; ?>
+    </div>
+
+    <h3>
+        <?php echo $this->__('Find your nearest Smartbox collection point'); ?>
+    </h3>
+
+    <ul class="messages" style="display: none;">
+        <li class="error-msg">
+            <ul>
+
+            </ul>
+        </li>
+    </ul>
+
+    <div class="smartbox-search">
+        <button type="button" class="button smartbox-search-button" onclick="return smartbox.getCurrentPosition(this);"><span><span><?php echo $this->__('Show Smartbox Near Me'); ?></span></span></button>
+        <span class="smartbox-or"><?php echo $this->__('or'); ?></span>
+        <div class="smartbox-search-form">
+            <input type="text" name="search" class="smartbox-search-input" id="smartbox-search-input" placeholder="Enter Area or Pin Code" />
+            <button type="button" class="button smartbox-search-button" id="smartbox-search-button" onclick="return smartbox.getPositionFromAddress($('smartbox-search-input').value, this);"><span><span><?php echo $this->__('Search'); ?></span></span></button>
+        </div>
+        <span class="know-more-locations"><a href="https://smartbox.in/locations.php" target="_blank" title="Smartbox Locations">Smartbox Locations</a></span>
+    </div>
+
+    <div class="hidden-validation">
+        <input type="radio" name="smartbox-terminal" id="store-empty" value="" class="validate-smartbox" />
+    </div>
+
+    <div id="smartbox-table">
+        <!-- This is populated via an Ajax request -->
+    </div>
+</div>
+
+<script type="text/javascript">
+    //Geolocation autocomplte initialization
+    $j("#smartbox-search-input").geocomplete();
+    $j("#examples a").click(function(){
+      $j("#smartbox-search-input").val($j(this).text()).trigger("geocode");
+      return false;
+    });
+
+    // Observe shipping method choices
+    smartbox.observeShippingMethods();
+
+    // Stop hitting submit taking you to the next step
+    smartbox.handleSubmit();
+
+    <?php if($this->getSmartboxPickup()): ?>
+        if($('shipping-progress-opcheckout') != undefined) {
+            $('shipping-progress-opcheckout').hide();
+        }
+    <?php endif; ?>
+
+    
+    // Add our new validation type
+    Validation.add('validate-smartbox', '<?php echo $this->__('Please select nearest Smartbox terminal to continue.'); ?>', function(v) {
+
+        // see if a method has been selected
+        if($$('[name=smartbox-terminal]:checked').first() == undefined) {
+            smartbox.throwError('<?php echo $this->__('Please select nearest Smartbox terminal to continue.'); ?>');
+            return false;
+        }
+
+        return true;
+    });
+</script>

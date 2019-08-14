@@ -1,0 +1,13 @@
+<?php if($googleApiKey = $this->getGoogleApiKey()): ?>
+<script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=<?php echo $googleApiKey; ?>">
+</script>
+
+<?php endif; ?>
+
+<script type="text/javascript">
+    var smartbox = new Smartbox(
+        '<?php echo $this->getSmartboxShippingMethodValue(); ?>',
+        '<?php echo Mage::getUrl('smartbox/index/getClosestLongLat', array('_secure' => true)); ?>'
+    );
+</script>

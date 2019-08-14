@@ -1,0 +1,11 @@
+<li class="control smartbox-control">
+    <input type="radio" name="billing[use_for_shipping]" id="billing:use_for_smartbox" value="smartbox" title="Collect From Smartbox" class="radio" />
+    <label for="billing:use_for_smartbox"><span class="ship-to">Collect From</span> <img src="<?php echo $this->getSkinUrl('images/smartbox/smartboxparcels/logo.png'); ?>" class="smartbox-logo" /></label>
+    
+<?php if($aboutInformation = $this->getAboutInformation()): ?>
+	<span class="smartbox-more-info-control">
+		<span class="smartbox-info-icon">i</span>
+    	<span class="smartbox-more-info"><?php echo $aboutInformation; ?></span>
+    </span>
+    <?php endif; ?>
+</li>

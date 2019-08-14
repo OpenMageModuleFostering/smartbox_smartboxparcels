@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+    <smartbox_smartboxparcels_adminhtml_smartboxparcels_index>
+        <reference name="content">
+            <block type="Smartbox_Smartboxparcels/adminhtml_smartboxparcels" name="smartboxparcels"></block>
+        </reference>
+    </smartbox_smartboxparcels_adminhtml_smartboxparcels_index>
+
+    <smartbox_smartboxparcels_adminhtml_smartboxparcels_edit>
+        <update handle="smartboxparcels_parcels_edit"/>
+        <reference name="content">
+            <block type="adminhtml/template" name="parcels" template="smartbox/smartboxparcels/parcels_edit.phtml"/>
+        </reference>
+    </smartbox_smartboxparcels_adminhtml_smartboxparcels_edit>
+
+</layout>

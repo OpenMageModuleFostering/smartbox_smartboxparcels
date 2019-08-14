@@ -1,0 +1,97 @@
+<?php
+$smartboxparcelsData = Mage::registry('smartboxparcelsData');
+
+?>
+
+<div class="content-header">
+    <table cellspacing="0" class="grid-header">
+        <tr>
+            <td><h3><?php echo $this->__('Edit parcel'); ?></h3></td>
+            <td class="a-right">
+                <button onclick="history.back();" class="button" title="<?php echo $this->__('Back') ?>" type="button"><span><span><?php echo $this->__('Back') ?></span></span></button>
+                <button onclick="editForm.submit()" class="scalable save" type="button"><span><?php echo $this->__('Parcel update'); ?></span></button>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="entry-edit">
+    <form id="editForm" name="editForm" method="post" action="<?php echo $this->getUrl('*/*/save'); ?>">
+        <input type="hidden" name="parcel_id" value="<?php echo $smartboxparcelsData['parcel_id']; ?>" />
+        <input type="hidden" name="id" value="<?php echo $smartboxparcelsData['id']; ?>" />
+        <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Parcel detail'); ?></h4>
+        <fieldset id="my-fieldset">
+            <table cellspacing="0" class="form-list">
+
+                
+                <tr>
+                    <td class="label"><?php echo $this->__('EShop Tracking Number'); ?>:</td>
+                    <td class="input-ele"><input class="input-text" name="parcel_EShop_trackingNumber" value="<?php echo $smartboxparcelsData['parcel_EShop_trackingNumber']; ?>" /></td>
+                </tr>
+                <tr>
+                    <td class="label" colspan="3">
+                    <strong>Receiver Details</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('First Name'); ?>:</td>
+                    <td class="input-ele"><input class="input-text" name="parcel_receiver_first_name" value="<?php echo $smartboxparcelsData['parcel_receiver_first_name']; ?>" /></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Middle Name'); ?>:</td>
+                    <td class="input-ele"><input class="input-text" name="parcel_receiver_middle_name" value="<?php echo $smartboxparcelsData['parcel_receiver_middle_name']; ?>" /></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Last Name'); ?>:</td>
+                    <td class="input-ele"><input class="input-text" name="parcel_receiver_last_name" value="<?php echo $smartboxparcelsData['parcel_receiver_last_name']; ?>" /></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Parcel Receiver Email'); ?>:</td>
+                    <td class="input-ele"><input class="input-text" name="parcel_receiver_email" value="<?php echo $smartboxparcelsData['parcel_receiver_email']; ?>" /></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Parcel Receiver Phone'); ?>:</td>
+                    <td class="input-ele"><input class="input-text" name="parcel_receiver_phone" value="<?php echo $smartboxparcelsData['parcel_receiver_phone']; ?>" /></td>
+                </tr>
+                <tr>
+                    <td class="label" colspan="3">
+                    <strong>Other Details</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Parcel size'); ?> <span class="required">*</span></td>
+                    <td class="input-ele">
+                        <select class="required-entry" id="parcel_size" name="parcel_size" <?php echo Mage::registry('disabledParcelSize'); ?>>
+                            <option value='' <?php if($smartboxparcelsData['parcel_size'] == ''){ echo "selected=selected";} ?>><?php echo Mage::registry('defaultParcelSize');?></option>
+                            <option value='<?php echo $this->__('s'); ?>' <?php if($smartboxparcelsData['parcel_size'] == $this->__('s')){ echo "selected=selected";} ?>><?php echo $this->__('s'); ?></option>
+                            <option value='<?php echo $this->__('m'); ?>' <?php if($smartboxparcelsData['parcel_size'] == $this->__('m')){ echo "selected=selected";} ?>><?php echo $this->__('m'); ?></option>
+                            <option value='<?php echo $this->__('l'); ?>' <?php if($smartboxparcelsData['parcel_size'] == $this->__('l')){ echo "selected=selected";} ?>><?php echo $this->__('l'); ?></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Parcel Target Machine Id'); ?>:</td>
+                    <td class="input-ele"><input class="input-text" name="parcel_target_machine_id" value="<?php echo $smartboxparcelsData['parcel_target_machine_id']; ?>"   /></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Grand Total'); ?>:</td>
+                    <td class="input-ele"><input class="input-text" name="parcel_grand_total" value="<?php echo $smartboxparcelsData['parcel_grand_total']; ?>"   /></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Payment Type'); ?>:</td>
+                    <td class="input-ele"><input class="input-text" name="parcel_paymentType" value="<?php echo $smartboxparcelsData['parcel_paymentType']; ?>"   /></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Payment Method'); ?>:</td>
+                    <td class="input-ele"><input class="input-text" name="parcel_paymentMethod" value="<?php echo $smartboxparcelsData['parcel_paymentMethod']; ?>" /></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Warehouse Id'); ?>:</td>
+                    <td class="input-ele"><input class="input-text" name="parcel_warehouseId" value="<?php echo $smartboxparcelsData['parcel_warehouseId']; ?>" /></td>
+                </tr>
+
+            </table>
+        </fieldset>
+    </form>
+</div>
+

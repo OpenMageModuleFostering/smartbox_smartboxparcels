@@ -1,0 +1,16 @@
+{
+    "name": "OpenMageModuleFostering/Smartbox_Smartboxparcels",
+    "type": "magento-module",
+    "license": "Open-Software-License",
+    "homepage": "",
+    "description": "Smartbox is India's first integrated network of automated parcel delivery terminals.",
+    "authors": [
+    {
+        "name": "Deepk Bhasin",
+        "email": "deepak@smartbox.in"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}

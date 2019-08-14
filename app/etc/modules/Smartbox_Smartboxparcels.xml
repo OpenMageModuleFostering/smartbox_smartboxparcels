@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Smartbox_Smartboxparcels>
+			<active>true</active>
+			<codePool>community</codePool>
+		</Smartbox_Smartboxparcels>
+	</modules>
+</config>

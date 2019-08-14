@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <sections>
+        <carriers>
+            <groups>
+                <Smartbox_Smartboxparcels translate="label comment">
+                    <label>Smartbox</label>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <comment><![CDATA[
+                        <img src="//smartbox.in/assets/img/logo-invert.png" width="150" style="margin: 4px 0 8px 0;" border="0"/><br />Smartbox integration provided by <a href="http://smartbox.in/" target="_blank">Smartbox Ecommerce Solutions Pvt. Ltd.</a>.
+                    ]]></comment>
+                    <fields>
+
+                        <module_version translate="label">
+                            <label>Magento Module Version</label>
+                            <frontend_model>Smartbox_Smartboxparcels/adminhtml_system_config_smartbox_moduleversion</frontend_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </module_version>
+
+                        <general translate="label">
+                            <label>Shipping Methods Settings</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </general>
+
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <name translate="label">
+                            <label>Method Name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </name>
+                        <more_information translate="label">
+                            <label>More Information</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[
+                                This information will be displayed in a tooltip on the billing step and the 'whats this?' link on the shipping methods panel.<br /><strong>Basic HTML allowed</strong>
+                            ]]></comment>
+                        </more_information>
+
+                        <price_heading translate="label">
+                            <label>Pricing</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </price_heading>
+
+                        <price translate="label comment">
+                            <label>Price</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[
+                                The total cost you wish to charge to the customer for using Smartbox.
+                            ]]></comment>
+                        </price>
+
+                        <type translate="label comment">
+                            <label>Pricing Type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_shipping_flatrate</source_model>
+                            <sort_order>31</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[
+                                Do you wish to charge the customer for each item, or just as a whole order?
+                            ]]></comment>
+                        </type>
+
+                        <smartbox_settings translate="label">
+                            <label>Smartbox Settings</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </smartbox_settings>
+
+                        
+
+                        <environment>
+                            <label>Environment</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Smartbox_Smartboxparcels/system_config_environment</source_model>
+                            <sort_order>37</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[
+                                The staging environment allows you to test your integration with Smartbox before release.
+                            ]]></comment>
+                        </environment>
+
+                        <configure_api>
+                            <label>Configure API URLs</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>38</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[
+                                Enable this if you need to manually update the API endpoints. Invalid configuration of these URLs can stop the Smartbox module from functioning.
+                            ]]></comment>
+                        </configure_api>
+
+                        
+
+                        <staging_api translate="label comment">
+                            <label>Staging API URL BASE URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[
+                                The URL path for the staging API. (eg. https://stage-apigw.smartbox.it/v1/)
+                            ]]></comment>
+                            <depends>
+                                <configure_api>1</configure_api>
+                            </depends>
+                        </staging_api>
+
+                        <production_api translate="label comment">
+                            <label>Production API BASE URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>41</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[
+                                The URL path for the production API. (eg. https://apigw.smartbox.it/v1/)
+                            ]]></comment>
+                            <depends>
+                                <configure_api>1</configure_api>
+                            </depends>
+                        </production_api>
+
+                        <api_key translate="label comment">
+                            <label>API Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>42</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[
+                                The API key for accessing Smartbox's API.
+                            ]]></comment>
+                            <depends>
+                                <configure_api>1</configure_api>
+                            </depends>
+                        </api_key>
+
+                        <warehouse_id translate="label comment">
+                            <label>Warehouse Id</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>43</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[
+                                The Default Warehouse Id used for creating parcels
+                            ]]></comment>
+                        </warehouse_id>
+
+
+                        <google_settings translate="label">
+                            <label>Google API Settings</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </google_settings>
+
+                        <google_api_key translate="label comment">
+                            <label>Google Maps JavaScript API Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>55</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[
+                                To best determine the users location from their address we require a API key from Google to utilise their Geocoding API's. Please see the API key section of <a href="https://developers.google.com/maps/documentation/geocoding/" target="_blank">this guide</a> for more information.
+                            ]]></comment>
+                        </google_api_key>
+
+                        <resitrctions translate="label">
+                            <label>Restrictions</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </resitrctions>
+
+                        <sallowspecific translate="label">
+                            <label>Available for specific countries only</label>
+                            <frontend_type>select</frontend_type>
+                            <frontend_class>shipping-applicable-country</frontend_class>
+                            <source_model>adminhtml/system_config_source_shipping_allspecificcountries</source_model>
+                            <sort_order>105</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </sallowspecific>
+                        <specificcountry translate="label">
+                            <label>Ship to Specific Countries</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>110</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <can_be_empty>1</can_be_empty>
+                        </specificcountry>
+                    </fields>
+                </Smartbox_Smartboxparcels>
+            </groups>
+        </carriers>
+        <payment>
+            <groups>
+                <Smartbox_Smartboxcsod translate="label">
+                    <label>Smartbox CSOD</label>
+                    <sort_order>1000</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <title translate="label">
+                          <label>Title</label>
+                          <frontend_type>text</frontend_type>
+                          <show_in_default>1</show_in_default>
+                          <show_in_website>1</show_in_website>
+                          <show_in_store>0</show_in_store>
+                          <sort_order>1</sort_order>
+                        </title>
+                        <active translate="label">
+                          <label>Enabled</label>
+                          <frontend_type>select</frontend_type>
+                          <source_model>adminhtml/system_config_source_yesno</source_model>
+                          <show_in_default>1</show_in_default>
+                          <show_in_website>1</show_in_website>
+                          <show_in_store>0</show_in_store>
+                          <sort_order>2</sort_order>
+                        </active>
+                        <order_status translate="label">
+                          <label>New order status</label>
+                          <frontend_type>select</frontend_type>
+                          <source_model>adminhtml/system_config_source_order_status</source_model>
+                          <show_in_default>1</show_in_default>
+                          <show_in_website>1</show_in_website>
+                          <show_in_store>0</show_in_store>
+                          <sort_order>3</sort_order>
+                        </order_status>
+                        <message translate="label">
+                            <label>Message</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[
+                                This information will be displayed at bottom of the payment method on the payment information step <br /><strong>Basic HTML allowed</strong>
+                            ]]></comment>
+                        </message>
+
+                        
+
+                        <disallowspecificpaymentmethods translate="label">
+                            <label>Disallow specific payment methods</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>150</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[
+                                Disallow any other payment method available with Smartbox CSOD
+                            ]]></comment>
+                        </disallowspecificpaymentmethods>
+                        <disallowedpaymentmethods translate="label">
+                            <label>Disallowed payment methods</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>160</sort_order>
+                            <source_model>Smartbox_Smartboxparcels/resource_availablePaymentMethods</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <disallowspecificpaymentmethods>1</disallowspecificpaymentmethods>
+                            </depends>
+                            <comment><![CDATA[
+                                Select any other payment method available with Smartbox CSOD
+                            ]]></comment>
+                        </disallowedpaymentmethods>
+
+                        <selection_message translate="label">
+                            <label>Selection Message</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[
+                                This information will be displayed when the user clicks on the Smartbox CSOD option in Payment Information Step.<br /><strong>Basic HTML allowed</strong>
+                            ]]></comment>
+                        </selection_message>
+                        <allowspecific translate="label">
+                          <label>Payment from applicable countries</label>
+                          <frontend_type>allowspecific</frontend_type>
+                          <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                          <show_in_default>1</show_in_default>
+                          <show_in_website>1</show_in_website>
+                          <show_in_store>1</show_in_store>
+                          <sort_order>4</sort_order>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                          <label>Payment from Specific countries</label>
+                          <frontend_type>multiselect</frontend_type>
+                          <source_model>adminhtml/system_config_source_country</source_model>
+                          <show_in_default>1</show_in_default>
+                          <show_in_website>1</show_in_website>
+                          <show_in_store>1</show_in_store>
+                          <sort_order>5</sort_order>
+                        </specificcountry>
+                    </fields>
+                </Smartbox_Smartboxcsod>
+            </groups>
+        </payment>
+    </sections>
+</config>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <checkout_onepage_index>
+        <reference name="head">
+            <action method="addJs">
+                <file>smartbox/jquery.geocomplete.js</file>
+            </action>
+            <action method="addJs">
+                <file>smartbox/smartbox.js</file>
+            </action>
+            <action method="addItem"><type>skin_css</type><file>css/smartbox/smartbox.css</file></action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="Smartbox_Smartboxparcels/onepage_setup" name="Smartbox.Smartboxparcels.setup"
+                   template="smartbox/smartboxparcels/onepage/setup.phtml"/>
+        </reference>
+    </checkout_onepage_index>
+
+    <smartbox_index_getclosestlonglat>
+        <remove name="right"/>
+        <remove name="left"/>
+        <remove name="footer"/>
+        <block type="Smartbox_Smartboxparcels/onepage_shipping_method_smartbox_table" name="root" output="toHtml"
+               template="smartbox/smartboxparcels/onepage/shipping/method/smartbox/table.phtml" />
+    </smartbox_index_getclosestlonglat>
+
+</layout>

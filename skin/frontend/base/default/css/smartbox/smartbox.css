@@ -1,0 +1,222 @@
+@font-face {
+  font-family: 'smartbox-icon';
+  src: url('fonts/smartbox-icon.eot?-s7vh28');
+  src: url('fonts/smartbox-icon.eot?#iefix-s7vh28') format('embedded-opentype'), url('fonts/smartbox-icon.woff?-s7vh28') format('woff'), url('fonts/smartbox-icon.ttf?-s7vh28') format('truetype'), url('fonts/smartbox-icon.svg?-s7vh28#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.know-more-locations{margin-left:5px;vertical-align: -webkit-baseline-middle;}
+.smartbox-info-icon{
+  color:#49A3F2;
+  font-family: 'smartbox-icon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size: 18px;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  vertical-align: text-bottom;
+  cursor: pointer;
+}
+.smartbox-danger{
+	color:#FF0000;
+	}
+.control.smartbox-control {
+  vertical-align: middle;
+  line-height: 21px;
+  position: relative;
+}
+.control.smartbox-control label .ship-to {
+  float: left;
+}
+.control.smartbox-control label img.smartbox-logo {
+  margin-left: 6px;
+  float: left;
+  height: 18px;
+  vertical-align: text-bottom;
+}
+.smartbox-more-info {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s ease-in-out 0.15s, opacity 0.15s ease-in-out;
+  position: absolute;
+  left: 0;
+  right: -200px;
+  bottom: 100%;
+  width: 390px;
+  background: #fff;
+  border: 1px solid #dbdbdb;
+  padding: 16px;
+}
+.smartbox-more-info-control{position: relative;vertical-align: -webkit-baseline-middle;}
+.smartbox-more-info-control:hover .smartbox-more-info {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
+}
+
+
+#smartbox-box {
+  width: auto;
+  padding: 20px 24px;
+  background: #f4f4f4;
+  margin-bottom: 16px;
+}
+#smartbox-box .smartbox-header {
+  float: left;
+  width: 100%;
+  margin-bottom:10px;
+}
+#smartbox-box .smartbox-header .smartbox-logo {
+  height: 40px;
+ 
+  margin-top: 4px;
+  display: inline-block;
+  vertical-align: bottom;
+}
+#smartbox-box .smartbox-header .whats-this {
+  line-height: 44px;
+  display: inline;
+  vertical-align: text-bottom;
+  margin-left: 4px;
+}
+#smartbox-box ul.messages {
+  margin: 8px 0 12px 0;
+}
+#smartbox-box .hidden-validation {
+  display: none;
+}
+#smartbox-box table {
+  text-align: left;
+  margin: 8px 0;
+}
+#smartbox-box table td.input {
+  text-align: center;
+}
+#smartbox-box table td.input .validation-advice {
+  display: none;
+}
+#smartbox-box table td,
+#smartbox-box table th {
+  padding: 8px 10px;
+  border-bottom: 2px solid #dbdbdb;
+  font-size:12px;
+}
+#smartbox-box table td label {
+  display: block;
+  width: 100%;
+  font-size:12px;
+}
+#smartbox-box table th {
+  font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+#smartbox-box table address {
+  font-size: 90%;
+}
+#smartbox-box table .more-information-td {
+  position: relative;
+}
+#smartbox-box table .more-information-td .list-icon {
+  margin:0 auto;
+}
+#smartbox-box table .more-information-td .list-icon:hover + .more-information {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
+}
+#smartbox-box table .more-information-td .more-information {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s ease-in-out 0.15s, opacity 0.15s ease-in-out;
+  background: white;
+  border: 1px solid #dbdbdb;
+  padding: 16px;
+  position: absolute;
+  left: -280px;
+  bottom: 90%;
+  right: -220px;
+}
+#smartbox-box table .more-information-td .more-information .opening-times {
+  float: left;
+  width: 47.5%;
+  margin-right: 2.5%;
+}
+#smartbox-box table .more-information-td .more-information .smartbox-map {
+  float: left;
+  width: 47.5%;
+  margin-left: 2.5%;
+}
+#smartbox-box table .more-information-td .more-information table {
+  width: 100%;
+}
+#smartbox-box table .more-information-td .more-information table.opening-times-table td,
+#smartbox-box table .more-information-td .more-information table.opening-times-table th {
+  padding: 4px 5px;
+  border-bottom: 2px solid #f4f4f4;
+}
+#smartbox-box table .more-information-td .more-information table.opening-times-table td {
+  text-align: right;
+}
+#smartbox-box table .more-information-td .more-information:hover {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
+}
+#smartbox-box .smartbox-search {
+  margin: 8px 0;
+}
+#smartbox-box .smartbox-search .smartbox-search-button {
+  margin-right: 8px;
+}
+#smartbox-box .smartbox-search .smartbox-search-form {
+  display: inline-block;
+  *zoom: 1;
+  *display: inline;
+}
+#smartbox-box .smartbox-search .smartbox-search-input {
+  margin-left: 8px;
+  text-transform: uppercase;
+  max-width: 210px;
+  height: 33px;
+}
+#smartbox-box .button.loading {
+  background: white url('../../images/Smartbox/Smartboxparcels/ajax-loader.gif') center center no-repeat;
+  background-size: 24px 24px;
+}
+#smartbox-box .button.loading span {
+  opacity: 0;
+}
+@media only screen and (max-width: 980px) {
+  #smartbox-box table .more-information-td .more-information {
+    left: -440px;
+    right: 0;
+  }
+}
+@media only screen and (max-width: 680px) {
+  #smartbox-box .smartbox-search .smartbox-search-button {
+    display: block;
+    width: 100%;
+    margin: 6px 0;
+  }
+  #smartbox-box .smartbox-search .smartbox-or {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  #smartbox-box .smartbox-search .smartbox-search-form {
+    display: block;
+    width: 100%;
+  }
+  #smartbox-box .smartbox-search .smartbox-search-form .smartbox-search-input {
+    margin: 6px 0 2px 0;
+    width: 100%;
+    display: block;
+    max-width: none;
+  }
+}

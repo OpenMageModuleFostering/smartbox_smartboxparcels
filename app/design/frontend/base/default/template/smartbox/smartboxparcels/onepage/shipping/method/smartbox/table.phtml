@@ -1,0 +1,142 @@
+<?php if($this->getTerminals()):
+ ?>
+    <table id="smartboxterminals" width="100%" cellspacing="0">
+        <thead>
+        <tr>
+            <th colspan="2"><?php echo $this->__('Terminal Address'); ?></th>
+            <th><?php echo $this->__('Distance'); ?></th>
+            <th><?php echo $this->__('Remark'); ?></th>
+            <th><?php echo $this->__('Hours'); ?></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        
+        foreach($this->getTerminals() as $terminal): ?>
+
+            <tr>
+                <td class="input"><input type="radio" name="smartbox-terminal" id="terminal-<?php echo $terminal->getData('number'); ?>" value="<?php echo $terminal->getData('number'); ?>" class="validate-smartbox" /></td>
+                <td width="65%">
+                    <label for="terminal-<?php echo $terminal->getData('number'); ?>"><?php echo $terminal->getnumber(); ?> | <?php echo $terminal->getData('address'); ?>
+                    <br>
+                    <?php $geocode = $terminal->getgeocode(); ?>
+                    <?php echo $geocode['formatted_address'] ?>
+                    
+                    <?php if($terminal->getlandmark()):?>
+                    <br><strong class="smartbox-danger">Landmark</strong>:
+                    <?php echo $terminal->landmark; ?>
+                     <?php endif;?>
+                     
+                     </label>
+                    
+                </td>
+                <td width="15%"><?php echo $terminal->getDistance(); ?> km</td>
+                <td width="20%" >
+				<?php if($terminal->getData('privateTerminal')['status']):?>
+                <span class="smartbox-danger"><?php echo $terminal->getData('privateTerminal')['description'];?></span>
+				<?php endif; ?>
+                </td>
+                <td width="8%" class="more-information-td">
+                    
+                    <img src="<?php echo $this->getSkinUrl('images/smartbox/smartboxparcels/list-icon.png'); ?>" class="list-icon" />
+                    
+                    <div class="more-information">
+                        <?php if($workingHours = $terminal->getData('workingHours')): ?>
+                            <div class="opening-times">
+                                <h3><?php echo $this->__('Opening Times:'); ?></h3>
+                                <table width="100%" class="opening-times-table">
+
+                               
+                                    <tr>
+                                        <th><strong>Monday</strong></th>
+                                        <?php if(!$workingHours['mondayClosed']): ?>
+                                        <th><?php echo $workingHours['mondayFrom'];?></th>
+                                        <th>To</th>
+                                        <th><?php echo $workingHours['mondayTo'];?></th>
+                                        <?php else: ?>
+                                        <th colspan="3" class="smartbox-danger"><?php echo $this->__('Closed');?></th>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>Tuesday</strong></th>
+                                        <?php if(!$workingHours['tuesdayClosed']): ?>
+                                        <th><?php echo $workingHours['tuesdayFrom'];?></th>
+                                        <th>To</th>
+                                        <th><?php echo $workingHours['tuesdayTo'];?></th>
+                                        <?php else: ?>
+                                        <th colspan="3" class="smartbox-danger"><?php echo $this->__('Closed');?></th>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>Wednesday</strong></th>
+                                        <?php if(!$workingHours['wednesdayClosed']): ?>
+                                        <th><?php echo $workingHours['wednesdayFrom'];?></th>
+                                        <th>To</th>
+                                        <th><?php echo $workingHours['wednesdayTo'];?></th>
+                                        <?php else: ?>
+                                        <th colspan="3" class="smartbox-danger"><?php echo $this->__('Closed');?></th>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>Thursday</strong></th>
+                                        <?php if(!$workingHours['thursdayClosed']): ?>
+                                        <th><?php echo $workingHours['thursdayFrom'];?></th>
+                                        <th>To</th>
+                                        <th><?php echo $workingHours['thursdayTo'];?></th>
+                                        <?php else: ?>
+                                        <th colspan="3" class="smartbox-danger"><?php echo $this->__('Closed');?></th>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>Friday</strong></th>
+                                        <?php if(!$workingHours['fridayClosed']): ?>
+                                        <th><?php echo $workingHours['fridayFrom'];?></th>
+                                        <th>To</th>
+                                        <th><?php echo $workingHours['fridayTo'];?></th>
+                                        <?php else: ?>
+                                        <th colspan="3" class="smartbox-danger"><?php echo $this->__('Closed');?></th>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>Saturday</strong></th>
+                                        <?php if(!$workingHours['saturdayClosed']): ?>
+                                        <th><?php echo $workingHours['saturdayFrom'];?></th>
+                                        <th>To</th>
+                                        <th><?php echo $workingHours['saturdayTo'];?></th>
+                                        <?php else: ?>
+                                        <th colspan="3" class="smartbox-danger"><?php echo $this->__('Closed');?></th>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>Sunday</strong></th>
+                                        <?php if(!$workingHours['sundayClosed']): ?>
+                                        <th><?php echo $workingHours['sundayFrom'];?></th>
+                                        <th>To</th>
+                                        <th><?php echo $workingHours['sundayTo'];?></th>
+                                        <?php else: ?>
+                                        <th colspan="3" class="smartbox-danger"><?php echo $this->__('Closed');?></th>
+                                        <?php endif; ?>
+                                    </tr>
+                                
+
+                                </table>
+                            </div>
+                        <?php endif; ?>
+                        <div class="smartbox-map">
+                            <iframe width="100%" height="250px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=<?php echo $geocode['lat']; ?>,<?php echo $geocode['lng']; ?>&z=14&output=embed"></iframe>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php else: ?>
+    <ul class="messages">
+        <li class="error-msg">
+            <ul>
+                <li><?php echo $this->__('Something went wrong, please try again later to choose Smartbox as a delivery option.'); ?></li>
+            </ul>
+        </li>
+    </ul>
+<?php endif; ?>
