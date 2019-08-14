@@ -2,7 +2,7 @@
 
     <?php if($this->getSmartboxPickup()): ?>
         <div style="display: none;">
-            <input name="shipping_method" type="radio" value="<?php echo Mage::helper('Smartbox_Smartboxparcels')->getShippingMethodCode(); ?>" id="s_method_<?php echo Mage::helper('Smartbox_Smartboxparcels')->getShippingMethodCode(); ?>" checked="checked" class="radio" />
+            <input name="shipping_method" type="radio" value="<?php echo Mage::helper('smartbox_smartboxparcels')->getShippingMethodCode(); ?>" id="s_method_<?php echo Mage::helper('smartbox_smartboxparcels')->getShippingMethodCode(); ?>" checked="checked" class="radio" />
         </div>
     <?php endif; ?>
 
@@ -37,7 +37,7 @@
             <input type="text" name="search" class="smartbox-search-input" id="smartbox-search-input" placeholder="Enter Area or Pin Code" />
             <button type="button" class="button smartbox-search-button" id="smartbox-search-button" onclick="return smartbox.getPositionFromAddress($('smartbox-search-input').value, this);"><span><span><?php echo $this->__('Search'); ?></span></span></button>
         </div>
-        <span class="know-more-locations"><a href="https://smartbox.in/locations.php" target="_blank" title="Smartbox Locations">Smartbox Locations</a></span>
+        <span class="know-more-locations"><a href="https://smartbox.in/locations.php" target="_blank" title="Smartbox Locations" class="smartbox-danger">See all Smartbox locations</a></span>
     </div>
 
     <div class="hidden-validation">
@@ -50,35 +50,71 @@
 </div>
 
 <script type="text/javascript">
-    //Geolocation autocomplte initialization
-    $j("#smartbox-search-input").geocomplete();
+    
+	if(typeof smartbox != "undefined"){
+		// Observe shipping method choices 
+		smartbox.observeShippingMethods();
+		
+      /*setTimeout(function(){ 
+		if($$('[name="shipping_method"]:checked').first() != undefined) {
+				// Determine which method is selected
+				if($$('[name="shipping_method"]:checked').first().value == 'Smartbox_Smartboxparcels_collection') {
+			
+					// Hide shipping address in the progress area
+					if($('shipping-progress-opcheckout') != undefined) {
+						$('shipping-progress-opcheckout').hide();
+					}
+			
+					$('smartbox-box').show();
+			
+				} else {
+			
+					// Show shipping address in the progress area
+					if($('shipping-progress-opcheckout') != undefined) {
+						$('shipping-progress-opcheckout').show();
+					}
+					$('smartbox-box').hide();
+				}
+			
+			}
+		}, 2500);*/
+		
+		$('smartbox-search-input').focus();
+	
+		// Stop hitting submit taking you to the next step
+		smartbox.handleSubmit();
+		smartbox.observerCheckoutProgressMutation();
+		
+		<?php if($this->getSmartboxPickup()): ?>
+			setTimeout(function(){ 
+				if($('shipping-progress-opcheckout') != undefined) {
+					$('shipping-progress-opcheckout').hide();
+				}
+			 }, 2500);
+		<?php endif; ?>
+	
+		
+		// Add our new validation type
+		Validation.add('validate-smartbox', '<?php echo $this->__('Please select nearest Smartbox terminal to continue.'); ?>', function(v) {
+	
+			// see if a method has been selected
+			if($$('[name=smartbox-terminal]:checked').first() == undefined) {
+				smartbox.throwError('<?php echo $this->__('Please select nearest Smartbox terminal to continue.'); ?>');
+				return false;
+			}
+	
+			return true;
+		});
+		
+		
+	}
+    
+
+    
+	//Geolocation autocomplte initialization
+    $j("#smartbox-search-input").geocomplete({country: 'in'});
     $j("#examples a").click(function(){
       $j("#smartbox-search-input").val($j(this).text()).trigger("geocode");
       return false;
-    });
-
-    // Observe shipping method choices
-    smartbox.observeShippingMethods();
-
-    // Stop hitting submit taking you to the next step
-    smartbox.handleSubmit();
-
-    <?php if($this->getSmartboxPickup()): ?>
-        if($('shipping-progress-opcheckout') != undefined) {
-            $('shipping-progress-opcheckout').hide();
-        }
-    <?php endif; ?>
-
-    
-    // Add our new validation type
-    Validation.add('validate-smartbox', '<?php echo $this->__('Please select nearest Smartbox terminal to continue.'); ?>', function(v) {
-
-        // see if a method has been selected
-        if($$('[name=smartbox-terminal]:checked').first() == undefined) {
-            smartbox.throwError('<?php echo $this->__('Please select nearest Smartbox terminal to continue.'); ?>');
-            return false;
-        }
-
-        return true;
-    });
+     });
 </script>

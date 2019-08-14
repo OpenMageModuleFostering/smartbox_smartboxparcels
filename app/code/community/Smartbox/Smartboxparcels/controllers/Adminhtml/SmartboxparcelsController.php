@@ -6,7 +6,7 @@ class Smartbox_Smartboxparcels_Adminhtml_SmartboxparcelsController extends Mage_
     protected function _initAction() {
         $this->loadLayout()
             ->_setActiveMenu('sales/smartboxparcels')
-            ->_addBreadcrumb(Mage::helper('adminhtml')->__('Items Manager'), Mage::helper('Smartbox_Smartboxparcels')->__('Item Manager'));
+            ->_addBreadcrumb(Mage::helper('adminhtml')->__('Items Manager'), Mage::helper('smartbox_smartboxparcels')->__('Item Manager'));
 
         return $this;
     }
@@ -19,6 +19,7 @@ class Smartbox_Smartboxparcels_Adminhtml_SmartboxparcelsController extends Mage_
     
 
     public function massCreateMultipleParcelsAction(){
+		
        
         $parcelsIds = $this->getRequest()->getPost('parcels_ids', array());
 
@@ -28,7 +29,7 @@ class Smartbox_Smartboxparcels_Adminhtml_SmartboxparcelsController extends Mage_
         $parcels = array();
         
         foreach ($parcelsIds as $id) {
-            $parcelCollection = Mage::getModel('Smartbox_Smartboxparcels/smartboxparcels')->load($id);
+            $parcelCollection = Mage::getModel('smartbox_smartboxparcels/smartboxparcels')->load($id);
             $orderCollection = Mage::getResourceModel('sales/order_grid_collection')
                 ->addFieldToFilter('entity_id', $parcelCollection->getOrderId())
                 ->getFirstItem();
@@ -37,9 +38,13 @@ class Smartbox_Smartboxparcels_Adminhtml_SmartboxparcelsController extends Mage_
 
             if($parcelDetailDb){
 
-            $terminal = Mage::getModel('Smartbox_Smartboxparcels/store')->load($parcelDetailDb->target_machine);
-            $terminal_id = $terminal->getData()[0]['_id'];
-            
+            $terminal = Mage::getModel('smartbox_smartboxparcels/terminal')->load($parcelDetailDb->target_machine);
+			
+			
+			
+            $terminal_id = $terminal->getData()['_id'];
+			
+			            
             $receiver_name = $parcelDetailDb->receiver->first_name;
             if($parcelDetailDb->receiver->middle_name){
                 $receiver_name .= ' '.$parcelDetailDb->receiver->middle_name;
@@ -60,11 +65,11 @@ class Smartbox_Smartboxparcels_Adminhtml_SmartboxparcelsController extends Mage_
                           'paymentMethod' => $parcelDetailDb->paymentMethod,
                           'EShop_trackingNumber' => $parcelDetailDb->EShop_trackingNumber);
             
-            $stores = Mage::getSingleton('Smartbox_Smartboxparcels/api_smartbox_terminals');
-            $result = $stores->createParcel($body);
+            $terminals = Mage::getSingleton('smartbox_smartboxparcels/api_smartbox_terminals');
+            $result = $terminals->createParcel($body);
             if(!empty($result) && is_array($result)){
                 //get tracking number from smartbox
-                $parcel_details = $stores->getParcelDetails($parcelDetailDb->EShop_trackingNumber);
+                $parcel_details = $terminals->getParcelDetails($parcelDetailDb->EShop_trackingNumber);
                 
                 if($parcel_details && is_array($parcel_details)){
                     $tracking_number = $parcel_details['trackingNumber'];
@@ -118,7 +123,7 @@ class Smartbox_Smartboxparcels_Adminhtml_SmartboxparcelsController extends Mage_
 
     public function editAction(){
         $id = $this->getRequest()->getParam('id');
-        $parcel = Mage::getModel('Smartbox_Smartboxparcels/smartboxparcels')->load($id);
+        $parcel = Mage::getModel('smartbox_smartboxparcels/smartboxparcels')->load($id);
         
 
         if ($parcel->getId() || $id == 0) {
@@ -166,7 +171,7 @@ class Smartbox_Smartboxparcels_Adminhtml_SmartboxparcelsController extends Mage_
                 $postData = $this->getRequest()->getPost();
                 $id = $postData['id'];
 
-                $parcel = Mage::getModel('Smartbox_Smartboxparcels/smartboxparcels')->load($postData['id']);
+                $parcel = Mage::getModel('smartbox_smartboxparcels/smartboxparcels')->load($postData['id']);
                 
                 $parcelTargetMachineDetailDb = json_decode($parcel->getParcelTargetMachineDetail());
                 $parcelDetailDb = json_decode($parcel->getParcelDetail());

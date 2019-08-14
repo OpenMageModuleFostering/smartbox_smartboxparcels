@@ -10,7 +10,7 @@ class Smartbox_Smartboxparcels_Block_Adminhtml_Smartboxparcels_Renderer_Link ext
 	{
         
             if($row->getParcelId() == ''){
-               $link_text = Mage::helper('Smartbox_Smartboxparcels')->__('Edit parcel');
+               $link_text = Mage::helper('smartbox_smartboxparcels')->__('Edit parcel');
             
             $url = $this->getUrl('*/*/edit/', array(
                     '_current'=>true,

@@ -4,7 +4,7 @@ class Smartbox_Smartboxparcels_Model_Resource_Smartboxparcels extends Mage_Core_
 {
     protected function _construct()
     {    
-        $this->_init('Smartbox_Smartboxparcels/smartboxparcels', 'id');
+        $this->_init('smartbox_smartboxparcels/smartboxparcels', 'id');
         
     }
 }

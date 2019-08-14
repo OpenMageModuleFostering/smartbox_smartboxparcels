@@ -6,6 +6,7 @@ class Smartbox_Smartboxparcels_Block_Adminhtml_System_Config_Smartbox_Modulevers
 
     public function render(Varien_Data_Form_Element_Abstract $element)
     {
+
         $useContainerId = $element->getData('use_container_id');
         return sprintf('<tr id="row_%s">
                 <td class="label">
@@ -24,4 +25,5 @@ class Smartbox_Smartboxparcels_Block_Adminhtml_System_Config_Smartbox_Modulevers
         $response = Mage::getConfig()->getModuleConfig('Smartbox_Smartboxparcels')->version;
         return $response;
     }
+
 }

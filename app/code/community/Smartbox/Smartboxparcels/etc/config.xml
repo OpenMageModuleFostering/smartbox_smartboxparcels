@@ -2,36 +2,36 @@
 <config>
 	<modules>
 		<Smartbox_Smartboxparcels>
-			<version>1.0.0</version>
+			<version>1.1.0</version>
 		</Smartbox_Smartboxparcels>
 	</modules>
 	<global>
 		<!--Define all blocks first here then start using them -->
 		<blocks>
-			<Smartbox_Smartboxparcels>
+			<smartbox_smartboxparcels>
 				<class>Smartbox_Smartboxparcels_Block</class>
-			</Smartbox_Smartboxparcels>
+			</smartbox_smartboxparcels>
 		</blocks>
 		<!--Define all models first here then start using them anywhere else e.g. in observers etc -->
 		<models>
-			<Smartbox_Smartboxparcels>
+			<smartbox_smartboxparcels>
 				<class>Smartbox_Smartboxparcels_Model</class>
-				<resourceModel>Smartbox_Smartboxparcels_Resource</resourceModel>
-			</Smartbox_Smartboxparcels>
-			<Smartbox_Smartboxparcels_Resource>
+				<resourceModel>smartbox_smartboxparcels_resource</resourceModel>
+			</smartbox_smartboxparcels>
+			<smartbox_smartboxparcels_resource>
 				<class>Smartbox_Smartboxparcels_Model_Resource</class>
 				<entities>
 					<smartboxparcels>
 						<table>order_shipping_smartboxparcels</table>
 					</smartboxparcels>
 				</entities>
-			</Smartbox_Smartboxparcels_Resource>
+			</smartbox_smartboxparcels_resource>
 		</models>
 		<!--Define all helper first then use it -->
 		<helpers>
-            <Smartbox_Smartboxparcels>
+            <smartbox_smartboxparcels>
                 <class>Smartbox_Smartboxparcels_Helper</class>
-            </Smartbox_Smartboxparcels>
+            </smartbox_smartboxparcels>
         </helpers>
 		<resources>
 			<smartboxparcels_setup>
@@ -57,11 +57,11 @@
             <!-- Check if the payment method is active in the backend or not -->
             <payment_method_is_active>
                 <observers>
-                    <Smartbox_Smartboxparcels_payment_method_is_active>
+                    <smartbox_smartboxparcels_payment_method_is_active>
                     <type>singleton</type>
-                    <class>Smartbox_Smartboxparcels/observer</class>
+                    <class>smartbox_smartboxparcels/observer</class>
                     <method>filterpaymentmethod</method>
-                    </Smartbox_Smartboxparcels_payment_method_is_active>
+                    </smartbox_smartboxparcels_payment_method_is_active>
                 </observers>
             </payment_method_is_active>
 
@@ -72,77 +72,87 @@
 		<!--Step 1 Insert Ship to Smartbox Option -->
 		<core_block_abstract_to_html_after>
 			<observers>
-				<Smartbox_Smartboxparcels_Shipping_Address>
-					<class>Smartbox_Smartboxparcels/observer</class>
+				<smartbox_smartboxparcels_shipping_address>
+					<class>smartbox_smartboxparcels/observer</class>
 					<method>insertShipToSmartbox</method>
-				</Smartbox_Smartboxparcels_Shipping_Address>
+				</smartbox_smartboxparcels_shipping_address>
 			</observers>
 		</core_block_abstract_to_html_after>
 		<!-- Step 2 Skip Shipping Information if Smartbox Option Selected at Billing Information -->
 		<controller_action_predispatch_checkout_onepage_saveBilling>
                 <observers>
-                    <Smartbox_Smartboxparcels>
-                        <class>Smartbox_Smartboxparcels/observer</class>
+                    <smartbox_smartboxparcels>
+                        <class>smartbox_smartboxparcels/observer</class>
                         <method>skipShippingInformation</method>
-                    </Smartbox_Smartboxparcels>
+                    </smartbox_smartboxparcels>
                 </observers>
         </controller_action_predispatch_checkout_onepage_saveBilling>
         <!-- Step 3 Insert Smartbox shipping method after available methods -->
         <core_block_abstract_to_html_after>
         	<observers>
-        		<Smartbox_Smartboxparcels_Shipping_Method>
+        		<smartbox_smartboxparcels_shipping_method>
         			<type>singleton</type>
-        			<class>Smartbox_Smartboxparcels/observer</class>
+        			<class>smartbox_smartboxparcels/observer</class>
         			<method>insertSmartboxMarkup</method>
-        		</Smartbox_Smartboxparcels_Shipping_Method>
+        		</smartbox_smartboxparcels_shipping_method>
         	</observers>
         </core_block_abstract_to_html_after>
 		<!-- Step 4 Event When the user saved the shipping method capture Smartbox Terminal -->
         <checkout_controller_onepage_save_shipping_method>
             <observers>
-                <Smartbox_Smartboxparcels>
+                <smartbox_smartboxparcels>
                     <type>singleton</type>
-                    <class>Smartbox_Smartboxparcels/observer</class>
+                    <class>smartbox_smartboxparcels/observer</class>
                     <method>captureTerminalFromShippingMethod</method>
-                </Smartbox_Smartboxparcels>
+                </smartbox_smartboxparcels>
             </observers>
         </checkout_controller_onepage_save_shipping_method>
+		<!-- Alter the progress block on the default Enterprise checkout -->
+            <core_block_abstract_to_html_before>
+                <observers>
+                    <smartbox_smartboxparcels_change_progress>
+                        <type>singleton</type>
+                        <class>smartbox_smartboxparcels/observer</class>
+                        <method>modifyShippingMethodProgress</method>
+                    </smartbox_smartboxparcels_change_progress>
+                </observers>
+            </core_block_abstract_to_html_before>    
         <!-- Step After Payment Method is Selected check if CSOD is selected -->
         <sales_quote_payment_import_data_before>
             <observers>
-                <Smartbox_Smartboxparcels>
+                <smartbox_smartboxparcels>
                     <type>singleton</type>
-                    <class>Smartbox_Smartboxparcels/observer</class>
+                    <class>smartbox_smartboxparcels/observer</class>
                     <method>checkPaymentMethod</method>
-                </Smartbox_Smartboxparcels>
+                </smartbox_smartboxparcels>
             </observers>
         </sales_quote_payment_import_data_before>
         <!-- Step 5 Before Quote Submission swap the shipping address with Smartbox Terminal Address -->
         <sales_model_service_quote_submit_success>
                 <observers>
-                    <Smartbox_Smartboxparcels>
+                    <smartbox_smartboxparcels>
                         <type>singleton</type>
-                        <class>Smartbox_Smartboxparcels/observer</class>
+                        <class>smartbox_smartboxparcels/observer</class>
                         <method>changeToSmartboxTerminalAddress</method>
-                    </Smartbox_Smartboxparcels>
+                    </smartbox_smartboxparcels>
                 </observers>
         </sales_model_service_quote_submit_success>
         <!-- Step 6 Now Insert Orders values in Smartbox Database -->
         <sales_model_service_quote_submit_after>
         	<observers>
-        		<Smartbox_Smartboxparcels>
+        		<smartbox_smartboxparcels>
         			<type>model</type>
-        			<class>Smartbox_Smartboxparcels/observer</class>
+        			<class>smartbox_smartboxparcels/observer</class>
         			<method>insertSmartboxOrdersInDb</method>
-        		</Smartbox_Smartboxparcels>
+        		</smartbox_smartboxparcels>
         	</observers>
         </sales_model_service_quote_submit_after>
 			</events>
 			<layout>
 				<updates>
-					<Smartbox_Smartboxparcels module="Smartbox_Smartboxparcels">
+					<smartbox_smartboxparcels module="Smartbox_Smartboxparcels">
 						<file>smartbox/smartboxparcels/layout.xml</file>
-					</Smartbox_Smartboxparcels>
+					</smartbox_smartboxparcels>
 				</updates>
 			</layout>
 			<routers>
@@ -159,13 +169,13 @@
 	<!-- Basic setup for our shipping method -->
     <default>
         <carriers>
-            <Smartbox_Smartboxparcels>
+            <smartbox_smartboxparcels>
                 <active>0</active>
-                <model>Smartbox_Smartboxparcels/carrier</model>
-                <title>Collect from your nearest Smartbox Terminal</title>
+                <model>smartbox_smartboxparcels/carrier</model>
+                <title>Self pick-up service</title>
 
                 <name>Smartbox</name>
-                <more_information><![CDATA[<h3>What is Smartbox?</h3><p>Whether you are at home/office or not there -  now you do not have to deal with a courier person for receiving your package.  Smartbox is an automated solution through which you can pick-up your deliveries 24/7. Smartbox also provides for CSOD (Card Swipe on Delivery) so that you can pay at the time of pick-up using any debit or credit card.</p>]]></more_information>
+                <more_information><![CDATA[<h3>What is Smartbox?</h3><p>Now you dont have to worry whether you will be available at home or office to take the delivery.  Smartbox is a FREE service of an automated parcel locker where you can pick-up your deliveries 24 hours a day. If selected at the time of check out – the courier person will make the delivery on the Smartbox which will automatically send an OTP on your mobile as soon as your parcel arrives.  Simply walk up to that Smartbox terminal and use the OTP to pick-up the parcel as per your convenience. </p><p><strong>Note:</strong> Smartbox can also be used for COD orders since you may pay at the time of pick-up using any of your debit or credit cards.</p>For more details visit <strong>www.smartbox.in</strong>]]></more_information>
                 <type>I</type>
                 <price>0.00</price>
 
@@ -179,32 +189,32 @@
                 <sort_order>9999999999</sort_order>
 
                 <sallowspecific>0</sallowspecific>
-            </Smartbox_Smartboxparcels>
+            </smartbox_smartboxparcels>
         </carriers>
         <payment>
-            <Smartbox_Smartboxcsod>
+            <smartbox_smartboxcsod>
                 <active>1</active>
-                <model>Smartbox_Smartboxparcels/smartboxcsod</model>
+                <model>smartbox_smartboxparcels/smartboxcsod</model>
                 <order_status>pending</order_status>
-                <title>Smartbox CSOD</title>
+                <title>Smartbox CSOD (Card Swipe on Delivery)</title>
                 <allowspecific>0</allowspecific>
                 <payment_action>sale</payment_action>
-                <selection_message><![CDATA[<img src="https://smartbox.in/assets/img/smartbox_csod.png" width="170" style="display: inline;float: right;">
-                    <p>Choose CSOD (Card Swipe on Delivery) to order now and pay at the time of pick-up.</p>
-                    <p>We accept all debit and credit cards. </p>]]>
+                <selection_message><![CDATA[<p>Smartbox can also be used for COD orders since you may pay at the time of pick-up using any of your debit or credit cards.</p>
+<p>We accept all major debit and credit cards.</p>
+<img src="https://smartbox.in/assets/img/smartbox_csod.png" width="170" style="display: inline;">]]>
                 </selection_message>
-            </Smartbox_Smartboxcsod>
+            </smartbox_smartboxcsod>
         </payment>
     </default>
     <admin>
         <routers>
-            <Smartbox_Smartboxparcels>
+            <smartbox_smartboxparcels>
                 <use>admin</use>
                 <args>
                     <module>Smartbox_Smartboxparcels</module>
                     <frontName>smartboxparcels</frontName>
                 </args>
-            </Smartbox_Smartboxparcels>
+            </smartbox_smartboxparcels>
         </routers>
     </admin>
 	<adminhtml>
@@ -216,9 +226,9 @@
                             <children>
                                 <config>
                                     <children>
-                                        <Smartbox_Smartboxparcels translate="title" module="Smartbox_Smartboxparcels">
+                                        <smartbox_smartboxparcels translate="title" module="smartbox_smartboxparcels">
                                             <title>Smartbox Settings</title>
-                                        </Smartbox_Smartboxparcels>
+                                        </smartbox_smartboxparcels>
                                     </children>
                                 </config>
                             </children>
@@ -239,19 +249,19 @@
         <menu>
             <sales>
                 <children>
-                    <Smartbox_Smartboxparcels translate="title" module="Smartbox_Smartboxparcels">
+                    <smartbox_smartboxparcels translate="title" module="smartbox_smartboxparcels">
                         <title>Smartbox</title>
                         <sort_order>31</sort_order>
                         <action>smartboxparcels/adminhtml_smartboxparcels</action>
-                    </Smartbox_Smartboxparcels>
+                    </smartbox_smartboxparcels>
                 </children>
             </sales>
         </menu>
         <layout>
             <updates>
-                <Smartbox_Smartboxparcels>
+                <smartbox_smartboxparcels>
                     <file>smartboxparcels.xml</file>
-                </Smartbox_Smartboxparcels>
+                </smartbox_smartboxparcels>
             </updates>
         </layout>
 	</adminhtml>

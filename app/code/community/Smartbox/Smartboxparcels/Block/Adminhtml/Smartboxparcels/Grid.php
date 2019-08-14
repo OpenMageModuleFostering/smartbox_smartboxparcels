@@ -16,7 +16,7 @@ class Smartbox_Smartboxparcels_Block_Adminhtml_Smartboxparcels_Grid extends Mage
     protected function _prepareCollection()
     {
         
-        $collection = Mage::getModel('Smartbox_Smartboxparcels/smartboxparcels')->getCollection();
+        $collection = Mage::getModel('smartbox_smartboxparcels/smartboxparcels')->getCollection();
         //$collection->addAttributeToFilter('parcel_id', array('notnull' => true));
         $collection->getSelect()->join(
             array('sfo' => $collection->getTable('sales/order')),
@@ -31,28 +31,28 @@ class Smartbox_Smartboxparcels_Block_Adminhtml_Smartboxparcels_Grid extends Mage
     {
         
         $this->addColumn('id', array(
-            'header'    => Mage::helper('Smartbox_Smartboxparcels')->__('ID'),
+            'header'    => Mage::helper('smartbox_smartboxparcels')->__('ID'),
             'width'     => '10px',
             'index'     => 'id',
             'type'  => 'number'
         ));
 
         $this->addColumn('increment_id', array(
-            'header'    => Mage::helper('Smartbox_Smartboxparcels')->__('Order ID'),
+            'header'    => Mage::helper('smartbox_smartboxparcels')->__('Order ID'),
             'width'     => '10px',
             'index'     => 'increment_id',
             'width'     => '10px',
         ));
 
         $this->addColumn('parcel_id', array(
-            'header'    => Mage::helper('Smartbox_Smartboxparcels')->__('Parcel ID'),
+            'header'    => Mage::helper('smartbox_smartboxparcels')->__('Parcel ID'),
             'width'     => '10px',
             'index'     => 'parcel_id',
             'width'     => '10px',
         ));
 
         $this->addColumn('tracking_number', array(
-            'header'    => Mage::helper('Smartbox_Smartboxparcels')->__('Smartbox Tracking Number'),
+            'header'    => Mage::helper('smartbox_smartboxparcels')->__('Smartbox Tracking Number'),
             'width'     => '10px',
             'index'     => 'tracking_number',
             'width'     => '10px',
@@ -67,11 +67,11 @@ class Smartbox_Smartboxparcels_Block_Adminhtml_Smartboxparcels_Grid extends Mage
         ));
 
         $this->addColumn('parcel_status', array(
-            'header'    =>  Mage::helper('Smartbox_Smartboxparcels')->__('Parcel Status'),
+            'header'    =>  Mage::helper('smartbox_smartboxparcels')->__('Parcel Status'),
             'width'     =>  '10px',
             'index'     =>  'parcel_status',
             'type'      =>  'options',
-            'options'   =>  Mage::helper('Smartbox_Smartboxparcels')->getParcelStatus(),
+            'options'   =>  Mage::helper('smartbox_smartboxparcels')->getParcelStatus(),
         ));
 
         $this->addColumn('parcel_target_machine_id', array(
@@ -82,7 +82,7 @@ class Smartbox_Smartboxparcels_Block_Adminhtml_Smartboxparcels_Grid extends Mage
         ));
 
         $this->addColumn('creation_date', array(
-            'header'    => Mage::helper('Smartbox_Smartboxparcels')->__('Creation date'),
+            'header'    => Mage::helper('smartbox_smartboxparcels')->__('Creation date'),
             'width'     => '10px',
             'type'      => 'datetime',
             'index'     => 'creation_date',
@@ -91,13 +91,13 @@ class Smartbox_Smartboxparcels_Block_Adminhtml_Smartboxparcels_Grid extends Mage
 
         $this->addColumn('action',
             array(
-                'header'    =>  Mage::helper('Smartbox_Smartboxparcels')->__('Action'),
+                'header'    =>  Mage::helper('smartbox_smartboxparcels')->__('Action'),
                 'width'     => '10',
                 'type'      => 'action',
                 'getter'    => 'getId',
                 'actions'   => array(
                     array(
-                        'caption'   => Mage::helper('Smartbox_Smartboxparcels')->__('Edit Parcel'),
+                        'caption'   => Mage::helper('smartbox_smartboxparcels')->__('Edit Parcel'),
                         'url'       => array('base'=> '*/*/edit'),
                         'field'     => 'id'
                     )
@@ -123,7 +123,7 @@ class Smartbox_Smartboxparcels_Block_Adminhtml_Smartboxparcels_Grid extends Mage
         $this->getMassactionBlock()->setUseSelectAll(false);
 
         $this->getMassactionBlock()->addItem('parcels', array(
-            'label'    => Mage::helper('Smartbox_Smartboxparcels')->__('Create multiple parcels'),
+            'label'    => Mage::helper('smartbox_smartboxparcels')->__('Create multiple parcels'),
             'url'      => $this->getUrl('*/*/massCreateMultipleParcels')
         ));
 

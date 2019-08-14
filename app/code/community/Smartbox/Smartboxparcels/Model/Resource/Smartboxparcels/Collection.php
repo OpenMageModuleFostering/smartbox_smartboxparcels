@@ -5,6 +5,6 @@ class Smartbox_Smartboxparcels_Model_Resource_Smartboxparcels_Collection extends
     public function _construct()
     {
         parent::_construct();
-        $this->_init('Smartbox_Smartboxparcels/smartboxparcels');
+        $this->_init('smartbox_smartboxparcels/smartboxparcels');
     }
 }

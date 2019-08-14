@@ -7,12 +7,12 @@ class Smartbox_Smartboxparcels_Model_Api_Smartbox_Terminals extends Smartbox_Sma
     private $terminals = false;
 
     //The location in the cache of our terminals JSON
-    const SMARTBOX_TERMINALS_CACHE_KEY = 'Smartbox_Smartboxparcels_Terminals';
+    const SMARTBOX_TERMINALS_CACHE_KEY = 'smartbox_smartboxparcels_terminals';
 
     //Retrieve all the terminals from the API
     public function getTerminals()
     {
-
+		
         // Only even attempt to load the terminals once
         if(!$this->terminals) {
 
@@ -29,7 +29,9 @@ class Smartbox_Smartboxparcels_Model_Api_Smartbox_Terminals extends Smartbox_Sma
                 $responseTerminals = parent::makeRequest($http);
                 $terminals = array();
                 foreach($responseTerminals as $terminal){
-                        $terminals[] = $terminal;
+					
+						$terminals[] = $terminal;
+						
                 }
                 $this->terminals = $terminals;
                 //update cache if the request returns terminals
@@ -91,8 +93,9 @@ class Smartbox_Smartboxparcels_Model_Api_Smartbox_Terminals extends Smartbox_Sma
         // Get closest terminals
         $closestTerminals = array();
         foreach($distances as $key => $distance) {
-
-            // Add distance into our array
+			
+			if($distance <= 60){
+				// Add distance into our array
             $terminals[$key]['distance'] = number_format($distance, 1);
 
             // Add terminal into our closestTerminals array
@@ -102,6 +105,7 @@ class Smartbox_Smartboxparcels_Model_Api_Smartbox_Terminals extends Smartbox_Sma
             if(count($closestTerminals) == $size) {
                 break;
             }
+				}
         }
         return $this->createTerminalCollection($closestTerminals);
     }
@@ -121,7 +125,7 @@ class Smartbox_Smartboxparcels_Model_Api_Smartbox_Terminals extends Smartbox_Sma
                 return $terminaldata[0];
             }
             // Add the data into a model and return
-            return Mage::getModel('Smartbox_Smartboxparcels/terminal')->addData($terminaldata[0]);
+            return Mage::getModel('smartbox_smartboxparcels/terminal')->addData($terminaldata[0]);
         }
 
         return false;
@@ -135,7 +139,7 @@ class Smartbox_Smartboxparcels_Model_Api_Smartbox_Terminals extends Smartbox_Sma
         // Loop through each terminal
         foreach($terminals as $terminal) {
                  // Create a new instance of the terminal model and append the data
-                $terminalItem = Mage::getModel('Smartbox_Smartboxparcels/terminal')->addData($terminal);
+                $terminalItem = Mage::getModel('smartbox_smartboxparcels/terminal')->addData($terminal);
                 // Add the item into our collection
                 $collection->addItem($terminalItem);
         }

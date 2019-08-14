@@ -3,12 +3,12 @@
 class Smartbox_Smartboxparcels_Model_Observer {
 	/*** Step 1 Insert Ship to Smartbox Option **/
 	public function insertShipToSmartbox(Varien_Event_Observer $observer){
-
+		
 		/*** Get the Block To be Inserted ***/
 		$block = $observer->getBlock();
 
 		/*** Confirm block type we are getting ***/
-		if(Mage::getStoreConfigFlag('carriers/Smartbox_Smartboxparcels/active') && $block instanceof Mage_Checkout_Block_Onepage_Billing){
+		if(Mage::getStoreConfigFlag('carriers/smartbox_smartboxparcels/active') && $block instanceof Mage_Checkout_Block_Onepage_Billing){
 
 			$transport = $observer->getTransport();
 			/*** Get clean html ***/
@@ -23,9 +23,8 @@ class Smartbox_Smartboxparcels_Model_Observer {
 			$li = $shipToDiff->current()->parentNode;
 			
 			/*** Get Partial html ***/
-			$shipToSmartbox = Mage::app()->getLayout()->createBlock('Smartbox_Smartboxparcels/onepage_billing_option')->toHtml();
+			$shipToSmartbox = Mage::app()->getLayout()->createBlock('smartbox_smartboxparcels/onepage_billing_option')->toHtml();
 			
-
 			 /*** Get Fragment ***/
             $fragment = $shipToDiff->getDocument()->createDocumentFragment();
             /*** Insert our Partial ***/
@@ -45,12 +44,9 @@ class Smartbox_Smartboxparcels_Model_Observer {
 
 		$controllerAction = $observer->getControllerAction();
 		/*** data from request ***/
-	
         $billing = $controllerAction->getRequest()->getPost('billing', array());
-
         /*** If user has selected Smartbox Option ***/        
         if(isset($billing['use_for_shipping']) && $billing['use_for_shipping'] == 'smartbox') {
-
         /*** Do similar as in use for Shipping ***/
         $billing['use_for_shipping'] = 1;
 
@@ -59,8 +55,6 @@ class Smartbox_Smartboxparcels_Model_Observer {
 
         /*** Set value for Further Evaluation ***/
             Mage::register('smartbox_pickup', true);
-
-        
         }
 
 	}
@@ -81,7 +75,7 @@ class Smartbox_Smartboxparcels_Model_Observer {
             /***  Add Our partial HTML ***/
             $html = (!Mage::registry('smartbox_pickup') ? $transport->getHtml() : '') . Mage::app()
                     ->getLayout()
-                    ->createBlock('Smartbox_Smartboxparcels/onepage_shipping_method_smartbox')
+                    ->createBlock('smartbox_smartboxparcels/onepage_shipping_method_smartbox')
                     ->setParentBlock($block)
                     ->toHtml();
 
@@ -110,14 +104,14 @@ class Smartbox_Smartboxparcels_Model_Observer {
 
 
         // Has the use selected to use Smartbox ?
-        if($quote->getShippingAddress()->getShippingMethod() == Mage::helper('Smartbox_Smartboxparcels')->getShippingMethodCode()) {
+        if($quote->getShippingAddress()->getShippingMethod() == Mage::helper('smartbox_smartboxparcels')->getShippingMethodCode()) {
 
         	// Grab the Terminal ID
             $terminalId = $request->getParam('smartbox-terminal');
              // If it's not empty attempt to load the terminal
             if(!empty($terminalId)) {
               // Attempt to load the terminal
-			  $terminal = Mage::getModel('Smartbox_Smartboxparcels/terminal')->load($terminalId);
+			  $terminal = Mage::getModel('smartbox_smartboxparcels/terminal')->load($terminalId);
             }
 
             if(empty($terminalId) || isset($terminal) && !(count($terminal->getData())>0) ) {
@@ -125,7 +119,7 @@ class Smartbox_Smartboxparcels_Model_Observer {
                 // Build our result array
                 $result = array(
                     'error' => -1,
-                    'message' => Mage::helper('Smartbox_Smartboxparcels')->__('The Smartbox terminal you\'ve selected is no longer available, please try and locate your nearest Terminal again.')
+                    'message' => Mage::helper('smartbox_smartboxparcels')->__('The Smartbox terminal that you\'ve selected is not available at the moment, please select a different terminal.')
                 );
 
                 // Send it over
@@ -143,7 +137,7 @@ class Smartbox_Smartboxparcels_Model_Observer {
             $parcel_detail  = array('EShop_trackingNumber' => '',
             						'receiver' => $receiver,
             						'size' => '',
-                                    'warehouseId' => Mage::helper('Smartbox_Smartboxparcels')->getWarehouseId(),
+                                    'warehouseId' => Mage::helper('smartbox_smartboxparcels')->getWarehouseId(),
             						'target_machine' => $terminalId,
                                     'grand_total' => $grandTotal );
             $terminal_data = $terminal->getData();
@@ -167,7 +161,7 @@ class Smartbox_Smartboxparcels_Model_Observer {
           
 
             // Set the terminal ID within the session
-            Mage::getSingleton('checkout/session')->setSmartboxTerminalId($terminalId)->setSmartboxTerminalName($terminal_data['address'])->setSmartboxTerminalData($data);
+            Mage::getSingleton('checkout/session')->setSmartboxTerminalId($terminalId)->setSmartboxTerminalName($terminal_data['address'])->setSmartboxTerminalAddress($terminal_data['geocode']['formatted_address'])->setSmartboxTerminalLandmark($terminal_data['landmark'])->setSmartboxTerminalData($data);
 
         }
         else {
@@ -184,25 +178,24 @@ class Smartbox_Smartboxparcels_Model_Observer {
 
         $quote = $observer->getQuote();
 
-        if($order->getShippingMethod() == Mage::helper('Smartbox_Smartboxparcels')->getShippingMethodCode()) {
+        if($order->getShippingMethod() == Mage::helper('smartbox_smartboxparcels')->getShippingMethodCode()) {
 
             // Retrieve the terminal ID from the session
             $terminalId = Mage::getSingleton('checkout/session')->getSmartboxTerminalId();
            
             // Verify we've got a terminal ID
             if(!$terminalId) {
-                Mage::throwException(Mage::helper('Smartbox_Smartboxparcels')->__('No terminal has been selected for collection from Smartbox, please try again.'));
+                Mage::throwException(Mage::helper('smartbox_smartboxparcels')->__('No terminal has been selected for collection from Smartbox, please try again.'));
             }
 
             // Load up the terminal
             /* @var $terminal Smartbox_Smartboxparcels_Model_Terminal */
-            $terminal = Mage::getModel('Smartbox_Smartboxparcels/terminal')->load($terminalId);
+            $terminal = Mage::getModel('smartbox_smartboxparcels/terminal')->load($terminalId);
       
 
             // Check the terminal can load
             if(!$terminal) {
-                //Mage::throwException(Mage::helper('Smartbox_Smartboxparcels')->__('The Smartbox Terminal you\'ve selected is no longer available, please try and locate your nearest Terminal again.'));
-                Mage::throwException(Mage::helper('Smartbox_Smartboxparcels')->__('Something went wrong, please try again later to choose Smartbox as a delivery option.'));
+                Mage::throwException(Mage::helper('smartbox_smartboxparcels')->__('Something went wrong, please try again later to choose Smartbox as a delivery option.'));
 
             }
 
@@ -219,6 +212,25 @@ class Smartbox_Smartboxparcels_Model_Observer {
        
         return $this;
 	}
+	
+		public function modifyShippingMethodProgress(Varien_Event_Observer $observer){
+
+			/* @var $block Mage_Checkout_Block_Onepage_Progress */
+			$block = $observer->getBlock();
+
+			// If we're within progress and the shipping method
+			if($block instanceof Mage_Checkout_Block_Onepage_Progress && $block->getTemplate() == 'checkout/onepage/progress/shipping_method.phtml') {
+				
+				// Check we're using Smartbox
+				if($block->getShippingMethod() == Mage::helper('smartbox_smartboxparcels')->getShippingMethodCode()) {
+	
+					$block->setTemplate('smartbox/smartboxparcels/onepage/progress/shipping_method.phtml');
+	
+				}
+	
+			}
+			return $this;
+    	}
 	/**** Step 6 Insert Order Details in Smartbox Order Table ***/
 	public function insertSmartboxOrdersInDb(Varien_Event_Observer $observer){
 
@@ -226,7 +238,7 @@ class Smartbox_Smartboxparcels_Model_Observer {
 		$quote = $observer->getQuote();
 		$quote_id = $quote->getId();
 
-		if($order->getShippingMethod() != Mage::helper('Smartbox_Smartboxparcels')->getShippingMethodCode()) {
+		if($order->getShippingMethod() != Mage::helper('smartbox_smartboxparcels')->getShippingMethodCode()) {
             return;
          }
 
@@ -235,27 +247,27 @@ class Smartbox_Smartboxparcels_Model_Observer {
 			$data = $smartboxparcels[$quote_id];
 			$data['order_id'] = $order->getId();
             $data['parcel_detail']['EShop_trackingNumber'] = $order->getIncrementId();
-            $smartboxparcelsModel = Mage::getModel('Smartbox_Smartboxparcels/smartboxparcels');
+            $smartboxparcelsModel = Mage::getModel('smartbox_smartboxparcels/smartboxparcels');
 
              $smartboxparcelsModel->setOrderId($data['order_id']);
              $smartboxparcelsModel->setParcelDetail(json_encode($data['parcel_detail']));
  			 $smartboxparcelsModel->setParcelTargetMachineId($data['parcel_target_machine_id']);
              $smartboxparcelsModel->setParcelTargetMachineDetail(json_encode($data['parcel_target_machine_detail']));
-             if(Mage::getStoreConfig('carriers/Smartbox_Smartboxparcels/environment') == 'staging'){
-                $smartboxparcelsModel->setApiSource(Mage::getStoreConfig('carriers/Smartbox_Smartboxparcels/staging_api'));
+             if(Mage::getStoreConfig('carriers/smartbox_smartboxparcels/environment') == 'staging'){
+                $smartboxparcelsModel->setApiSource(Mage::getStoreConfig('carriers/smartbox_smartboxparcels/staging_api'));
              }
              else{
-                $smartboxparcelsModel->setApiSource(Mage::getStoreConfig('carriers/Smartbox_Smartboxparcels/production_api'));
+                $smartboxparcelsModel->setApiSource(Mage::getStoreConfig('carriers/smartbox_smartboxparcels/production_api'));
              }
-             $smartboxparcelsModel->setApiKey(substr(Mage::getStoreConfig('carriers/Smartbox_Smartboxparcels/api_key') , 0, 5));
+             $smartboxparcelsModel->setApiKey(substr(Mage::getStoreConfig('carriers/smartbox_smartboxparcels/api_key') , 0, 5));
              $smartboxparcelsModel->save();
 		}
 		
 	}
+	
+	
     /*** Step after the user has selected the payment Method ***/
     public function checkPaymentMethod(Varien_Event_Observer $observer){
-
-        
 
          if($paymentMethod = Mage::app()->getRequest()->getParam('payment')['method'] ){
 
@@ -265,9 +277,9 @@ class Smartbox_Smartboxparcels_Model_Observer {
             $shippingMethod = $quote->getShippingAddress()->getShippingMethod();
 
             $smartboxparcels = Mage::getSingleton('checkout/session')->getSmartboxTerminalData();
-            if($shippingMethod == 'Smartbox_Smartboxparcels_collection'){
+            if($shippingMethod == 'smartbox_smartboxparcels_collection'){
 
-                if($paymentMethod == 'Smartbox_Smartboxcsod'){
+                if($paymentMethod == 'smartbox_smartboxcsod'){
                     if(isset($smartboxparcels[$quote_id])){
                         $smartboxparcels[$quote_id]['parcel_detail']['paymentType'] = 'COD';
                         $smartboxparcels[$quote_id]['parcel_detail']['paymentMethod'] = $paymentMethod;
@@ -291,16 +303,16 @@ class Smartbox_Smartboxparcels_Model_Observer {
         if($quote = $event->getQuote()){
 
         if($shipping_method = $quote->getShippingAddress()->getShippingMethod()){
-            if($shipping_method == 'Smartbox_Smartboxparcels_collection'){
+            if($shipping_method == 'smartbox_smartboxparcels_collection'){
 
-            if(Mage::getStoreConfig('payment/Smartbox_Smartboxcsod/disallowspecificpaymentmethods')){
+            if(Mage::getStoreConfig('payment/smartbox_smartboxcsod/disallowspecificpaymentmethods')){
                 //get result
                 $result  = $event->getResult();
                 //get payment method 
                 $method = $observer->getEvent()->getMethodInstance();
                 $shippingMethodCode = $method->getCode();
 
-                    $disallowedShippingMethods = Mage::getStoreConfig('payment/Smartbox_Smartboxcsod/disallowedpaymentmethods');
+                    $disallowedShippingMethods = Mage::getStoreConfig('payment/smartbox_smartboxcsod/disallowedpaymentmethods');
 
                     if (in_array($shippingMethodCode, explode(',', $disallowedShippingMethods))) {
                          $result->isAvailable = false;
@@ -314,7 +326,7 @@ class Smartbox_Smartboxparcels_Model_Observer {
                 $method = $observer->getEvent()->getMethodInstance();
                 $shippingMethodCode = $method->getCode();
 
-            if($shippingMethodCode == 'Smartbox_Smartboxcsod'){
+            if($shippingMethodCode == 'smartbox_smartboxcsod'){
                 $result->isAvailable = false;
                 }
             }

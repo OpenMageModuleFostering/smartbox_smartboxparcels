@@ -4,7 +4,7 @@ class Smartbox_Smartboxparcels_Block_Onepage_Shipping_Method_Smartbox extends Ma
 
 	protected function _construct(){
 		parent::_construct();
-		$this->setTemplate('Smartbox/Smartboxparcels/onepage/shipping/method/smartbox.phtml');
+		$this->setTemplate('smartbox/smartboxparcels/onepage/shipping/method/smartbox.phtml');
 		return $this;
 	}
 	// Return Parent Block
@@ -23,7 +23,7 @@ class Smartbox_Smartboxparcels_Block_Onepage_Shipping_Method_Smartbox extends Ma
 	protected function getAboutInformation()
     {
         // Check that more information is set
-        if($moreInformation = Mage::getStoreConfig('carriers/Smartbox_Smartboxparcels/more_information')) {
+        if($moreInformation = Mage::getStoreConfig('carriers/smartbox_smartboxparcels/more_information')) {
 
             // Strip out any nasty tags
             $filter = new Zend_Filter_StripTags(array(

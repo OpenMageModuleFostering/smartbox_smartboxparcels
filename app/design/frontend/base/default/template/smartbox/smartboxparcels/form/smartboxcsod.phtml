@@ -4,3 +4,10 @@
 <div>
     <?php echo $this->getMethod()->getConfigData('message');?>
 </div>
+<script>
+setTimeout(function(){ 
+				if($('shipping-progress-opcheckout') != undefined) {
+					$('shipping-progress-opcheckout').hide();
+				}
+}, 3100);
+</script>

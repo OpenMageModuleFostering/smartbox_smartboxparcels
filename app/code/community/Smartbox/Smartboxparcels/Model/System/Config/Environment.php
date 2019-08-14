@@ -10,8 +10,8 @@ class Smartbox_Smartboxparcels_Model_System_Config_Environment
     public function toOptionArray()
     {
         return array(
-            array('value'=> self::SMARTBOX_STAGING, 'label'=> Mage::helper('Smartbox_Smartboxparcels')->__('Staging')),
-            array('value'=> self::SMARTBOX_PRODUCTION, 'label'=>Mage::helper('Smartbox_Smartboxparcels')->__('Production')),
+            array('value'=> self::SMARTBOX_STAGING, 'label'=> Mage::helper('smartbox_smartboxparcels')->__('Staging')),
+            array('value'=> self::SMARTBOX_PRODUCTION, 'label'=>Mage::helper('smartbox_smartboxparcels')->__('Production')),
         );
     }
 }

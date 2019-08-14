@@ -52,7 +52,7 @@ class Smartbox_Smartboxparcels_Model_Terminal extends Varien_Object
     //get object of terminals
     protected function getApi()
     {
-        return Mage::getSingleton('Smartbox_Smartboxparcels/api_smartbox_terminals');
+        return Mage::getSingleton('smartbox_smartboxparcels/api_smartbox_terminals');
     }
 
 }

@@ -3,10 +3,10 @@
     "type": "magento-module",
     "license": "Open-Software-License",
     "homepage": "",
-    "description": "Smartbox is India's first integrated network of automated parcel delivery terminals.",
+    "description": "Smartbox is an automated delivery solution that gives your customers the flexibility to pickup deliveries 24/7",
     "authors": [
     {
-        "name": "Deepk Bhasin",
+        "name": "Deepak Bhasin",
         "email": "deepak@smartbox.in"
     }
 ],

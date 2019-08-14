@@ -3,7 +3,7 @@
 
     <smartbox_smartboxparcels_adminhtml_smartboxparcels_index>
         <reference name="content">
-            <block type="Smartbox_Smartboxparcels/adminhtml_smartboxparcels" name="smartboxparcels"></block>
+            <block type="smartbox_smartboxparcels/adminhtml_smartboxparcels" name="smartboxparcels"></block>
         </reference>
     </smartbox_smartboxparcels_adminhtml_smartboxparcels_index>
 

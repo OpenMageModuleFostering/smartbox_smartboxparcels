@@ -3,7 +3,7 @@
     <sections>
         <carriers>
             <groups>
-                <Smartbox_Smartboxparcels translate="label comment">
+                <smartbox_smartboxparcels translate="label comment">
                     <label>Smartbox</label>
                     <sort_order>2</sort_order>
                     <show_in_default>1</show_in_default>
@@ -13,10 +13,9 @@
                         <img src="//smartbox.in/assets/img/logo-invert.png" width="150" style="margin: 4px 0 8px 0;" border="0"/><br />Smartbox integration provided by <a href="http://smartbox.in/" target="_blank">Smartbox Ecommerce Solutions Pvt. Ltd.</a>.
                     ]]></comment>
                     <fields>
-
                         <module_version translate="label">
                             <label>Magento Module Version</label>
-                            <frontend_model>Smartbox_Smartboxparcels/adminhtml_system_config_smartbox_moduleversion</frontend_model>
+                            <frontend_model>smartbox_smartboxparcels/adminhtml_system_config_smartbox_moduleversion</frontend_model>
                             <sort_order>1</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -117,7 +116,7 @@
                         <environment>
                             <label>Environment</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>Smartbox_Smartboxparcels/system_config_environment</source_model>
+                            <source_model>smartbox_smartboxparcels/system_config_environment</source_model>
                             <sort_order>37</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -251,12 +250,12 @@
                             <can_be_empty>1</can_be_empty>
                         </specificcountry>
                     </fields>
-                </Smartbox_Smartboxparcels>
+                </smartbox_smartboxparcels>
             </groups>
         </carriers>
         <payment>
             <groups>
-                <Smartbox_Smartboxcsod translate="label">
+                <smartbox_smartboxcsod translate="label">
                     <label>Smartbox CSOD</label>
                     <sort_order>1000</sort_order>
                     <show_in_default>1</show_in_default>
@@ -319,7 +318,7 @@
                             <label>Disallowed payment methods</label>
                             <frontend_type>multiselect</frontend_type>
                             <sort_order>160</sort_order>
-                            <source_model>Smartbox_Smartboxparcels/resource_availablePaymentMethods</source_model>
+                            <source_model>smartbox_smartboxparcels/resource_availablePaymentMethods</source_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -361,7 +360,7 @@
                           <sort_order>5</sort_order>
                         </specificcountry>
                     </fields>
-                </Smartbox_Smartboxcsod>
+                </smartbox_smartboxcsod>
             </groups>
         </payment>
     </sections>

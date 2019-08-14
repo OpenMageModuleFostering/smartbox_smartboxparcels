@@ -4,7 +4,6 @@ class Smartbox_Smartboxparcels_Model_Smartboxparcels extends Mage_Core_Model_Abs
 {
     protected function _construct()
     {
-    	
-        $this->_init('Smartbox_Smartboxparcels/smartboxparcels');
+        $this->_init('smartbox_smartboxparcels/smartboxparcels');
     }
 }

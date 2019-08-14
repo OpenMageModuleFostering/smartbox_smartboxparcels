@@ -4,7 +4,7 @@ class Smartbox_Smartboxparcels_Helper_Data extends Mage_Core_Helper_Abstract
 {
     public function getShippingMethodCode()
     {
-        $carrier = Mage::getSingleton('Smartbox_Smartboxparcels/carrier');
+        $carrier = Mage::getSingleton('smartbox_smartboxparcels/carrier');
         return $carrier->getCarrierCode() . '_' . $carrier::METHOD_KEY;
     }
     public function getParcelStatus(){
@@ -15,7 +15,7 @@ class Smartbox_Smartboxparcels_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     public function getWarehouseId(){
-        return Mage::getStoreConfig('carriers/Smartbox_Smartboxparcels/warehouse_id');
+        return Mage::getStoreConfig('carriers/smartbox_smartboxparcels/warehouse_id');
     }
 
 }

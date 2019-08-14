@@ -8,6 +8,28 @@ Smartbox.prototype = {
         this.AjaxUrl = AjaxUrl;
         this.terminalSelection = false;
     },
+	observerCheckoutProgressMutation: function(){
+		// select the target node
+		var target = document.getElementById('checkout-progress-wrapper');
+		// create an observer instance
+		this.observer = new MutationObserver(function (mutations) {
+			mutations.forEach(function (mutation) {
+				//console.log(mutation);
+				if(typeof smartbox != "undefined"){
+					smartbox.observeShippingMethods();
+					}
+			});
+		});
+		// configuration of the observer:
+		var config = {
+			attributes: true,
+			childList: true,
+			characterData: true
+		};
+		// pass in the target node, as well as the observer options
+		this.observer.observe(target, config);
+		
+		},
     // hide show Smartbox Terminal Listing
     observeShippingMethods: function() {
         // Check all shipping method for changes
@@ -130,6 +152,7 @@ Smartbox.prototype = {
 
         // Check if the address is empty
         if(address == '') {
+			this.throwError('Please enter area or pincode.');
             return false;
         }
 
@@ -283,12 +306,12 @@ Smartbox.prototype = {
             // Show the message box
             messageBox.show();
 
-            // Hide the message box after 7.5 seconds
+            // Hide the message box after 20 seconds
             hideMessages = false;
             clearTimeout(hideMessages);
             hideMessages = setTimeout(function () {
                 messageBox.hide();
-            }, 15000);
+            }, 20000);
 
         } else {
             alert(message);

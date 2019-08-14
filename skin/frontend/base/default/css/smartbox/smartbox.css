@@ -5,6 +5,7 @@
   font-weight: normal;
   font-style: normal;
 }
+
 .know-more-locations{margin-left:5px;vertical-align: -webkit-baseline-middle;}
 .smartbox-info-icon{
   color:#49A3F2;
@@ -184,9 +185,11 @@
   text-transform: uppercase;
   max-width: 210px;
   height: 33px;
+  width:180px;
+  font-size:10px;
 }
 #smartbox-box .button.loading {
-  background: white url('../../images/Smartbox/Smartboxparcels/ajax-loader.gif') center center no-repeat;
+  background: url('../../images/smartbox/smartboxparcels/ajax-loader.gif') center center no-repeat;
   background-size: 24px 24px;
 }
 #smartbox-box .button.loading span {
@@ -220,3 +223,7 @@
     max-width: none;
   }
 }
+.more-information .opening-times .opening-times-table td,.more-information .opening-times .opening-times-table th{
+	font-size:12px !important;
+	}
+.smartbox-sidebar-logo{width:150px;margin-bottom:5px;}

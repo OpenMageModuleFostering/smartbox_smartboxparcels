@@ -3,43 +3,12 @@
 abstract class Smartbox_Smartboxparcels_Model_Api_Smartbox_Abstract extends Mage_Core_Model_Abstract
 {
 
-    const API_KEY_XML_PATH = 'carriers/Smartbox_Smartboxparcels/api_key';
-    const API_ENVIRONMENT_XML_PATH = 'carriers/Smartbox_Smartboxparcels/environment';
-    const API_STAGING_XML_PATH = 'carriers/Smartbox_Smartboxparcels/staging_api';
-    const API_PRODUCTION_XML_PATH = 'carriers/Smartbox_Smartboxparcels/production_api';
+    const API_KEY_XML_PATH = 'carriers/smartbox_smartboxparcels/api_key';
+    const API_ENVIRONMENT_XML_PATH = 'carriers/smartbox_smartboxparcels/environment';
+    const API_STAGING_XML_PATH = 'carriers/smartbox_smartboxparcels/staging_api';
+    const API_PRODUCTION_XML_PATH = 'carriers/smartbox_smartboxparcels/production_api';
 
-    //Save the access token
-    protected $accessToken = false;
-
-    //Retrieve an access token from the powers that be
-    public function getAccessToken($scope)
-    {
-        // Define the post data
-        $postData = array(
-            'grant_type' => 'client_credentials',
-            'scope' => $scope
-        );
-
-        // Make the request to the API
-        $http = $this->buildRequest('oauth/token', Varien_Http_Client::POST, $postData, true, false);
-
-        // Add in our auth
-        $http->setAuth(
-            Mage::getStoreConfig(self::API_KEY_XML_PATH),
-            Mage::getStoreConfig(self::API_SECRET_XML_PATH)
-        );
-
-        // Make the request
-        $response = $this->makeRequest($http);
-
-        // Verify we received an access token back
-        if(isset($response['access_token']) && !empty($response['access_token'])) {
-            $this->accessToken = $response['access_token'];
-        }
-
-        return $this->accessToken;
-    }
-
+    
     // make requests the API
     protected function buildRequest($call, $method = Varien_Http_Client::GET, $postData = false, $headers = false)
     {
@@ -114,11 +83,14 @@ abstract class Smartbox_Smartboxparcels_Model_Api_Smartbox_Abstract extends Mage
             $this->_log($e);
             return false;
         }
-
+		
+		
+		
         // Check the status of the request
         if($response->getStatus() == 200) {
 
             // Retrieve the raw body, which should be JSON
+			
             $body = $response->getBody();
 
             // Catch any errors
@@ -153,27 +125,8 @@ abstract class Smartbox_Smartboxparcels_Model_Api_Smartbox_Abstract extends Mage
         if($data instanceof Exception) {
             $data = $data->getMessage() . "\n" . $data->getTraceAsString();
         }
-        Mage::log($data, null, 'Smartbox_Smartboxparcels.log', true);
+        Mage::log($data, null, 'smartbox_smartboxparcels.log', true);
     }
 
-    //Build the scope string from an array
-    protected function buildScope($scope, $terminalId)
-    {
-        // If we've not been given an array convert it over
-        if(!is_array($scope)) {
-            $scope = array($scope);
-        }
-
-        // Retrieve any extra scopes
-        $scopes = Mage::getStoreConfig(self::API_SCOPE_XML_PATH, $terminalId);
-        if($scopes) {
-            // Convert the string into an array
-            $scopesArray = explode(' ', $scopes);
-
-            // Merge the array's
-            $scope = array_merge($scope, $scopesArray);
-        }
-
-        return implode(' ', $scope);
-    }
+    
 }

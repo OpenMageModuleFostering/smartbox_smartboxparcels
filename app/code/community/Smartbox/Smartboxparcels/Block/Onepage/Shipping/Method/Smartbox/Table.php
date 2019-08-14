@@ -5,7 +5,7 @@ class Smartbox_Smartboxparcels_Block_Onepage_Shipping_Method_Smartbox_Table exte
     //Return the terminal API
     private function _getTerminalApi()
     {
-        return Mage::getSingleton('Smartbox_Smartboxparcels/api_smartbox_terminals');
+        return Mage::getSingleton('smartbox_smartboxparcels/api_smartbox_terminals');
     }
 
     //Return the terminals

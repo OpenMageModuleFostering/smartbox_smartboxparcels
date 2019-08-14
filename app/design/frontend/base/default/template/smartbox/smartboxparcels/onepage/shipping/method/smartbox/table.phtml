@@ -10,14 +10,15 @@
         </tr>
         </thead>
         <tbody>
-        <?php
-        
-        foreach($this->getTerminals() as $terminal): ?>
-
+        	<?php
+			$terminals_doesnt_exist = true;
+        foreach($this->getTerminals() as $terminal):
+		$terminals_doesnt_exist = false;
+		 ?>
             <tr>
                 <td class="input"><input type="radio" name="smartbox-terminal" id="terminal-<?php echo $terminal->getData('number'); ?>" value="<?php echo $terminal->getData('number'); ?>" class="validate-smartbox" /></td>
                 <td width="65%">
-                    <label for="terminal-<?php echo $terminal->getData('number'); ?>"><?php echo $terminal->getnumber(); ?> | <?php echo $terminal->getData('address'); ?>
+                    <label for="terminal-<?php echo $terminal->getData('number'); ?>"># <?php echo $terminal->getnumber(); ?> | <?php echo $terminal->getData('address'); ?>
                     <br>
                     <?php $geocode = $terminal->getgeocode(); ?>
                     <?php echo $geocode['formatted_address'] ?>
@@ -129,6 +130,15 @@
                 </td>
             </tr>
         <?php endforeach; ?>
+<?php if($terminals_doesnt_exist):?>
+    	<ul class="messages">
+            <li class="error-msg">
+                <ul>
+                    <li><?php echo $this->__('No nearby Smartbox was found, please try a new search'); ?></li>
+                </ul>
+            </li>
+        </ul>
+<?php endif; ?>
         </tbody>
     </table>
 <?php else: ?>

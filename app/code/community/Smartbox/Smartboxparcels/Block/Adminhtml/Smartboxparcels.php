@@ -5,12 +5,11 @@ class Smartbox_Smartboxparcels_Block_Adminhtml_Smartboxparcels extends Mage_Admi
 
     public function __construct()
     {
-    	$this->_blockGroup = 'Smartbox_Smartboxparcels';
+    	$this->_blockGroup = 'smartbox_smartboxparcels';
         $this->_controller = 'adminhtml_smartboxparcels';        
-        $this->_headerText = Mage::helper('Smartbox_Smartboxparcels')->__('Parcels');
+        $this->_headerText = Mage::helper('smartbox_smartboxparcels')->__('Parcels');
         parent::__construct();
         $this->_removeButton('add');
-       
     }
 
 }

@@ -5,7 +5,7 @@ class Smartbox_Smartboxparcels_Model_Carrier
     implements Mage_Shipping_Model_Carrier_Interface
 {
     // Carrier Code , Found in parent Class
-    protected $_code = 'Smartbox_Smartboxparcels';
+    protected $_code = 'smartbox_smartboxparcels';
 
     // Method Key
     const METHOD_KEY = 'collection';
@@ -32,7 +32,7 @@ class Smartbox_Smartboxparcels_Model_Carrier
         $rate->setCarrier($this->_code);
         $rate->setMethod('collection');
         $rate->setCarrierTitle($this->getConfigData('title'));
-        $rate->setMethodTitle($this->getConfigData('name'));
+        $rate->setMethodTitle($this->getConfigData('name').' (FREE)');
         $rate->setPrice($this->getConfigData('price'));
         $rate->setCost(0);
         return $rate;
