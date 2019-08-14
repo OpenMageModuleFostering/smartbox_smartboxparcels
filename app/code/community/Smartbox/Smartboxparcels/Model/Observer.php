@@ -128,6 +128,8 @@ class Smartbox_Smartboxparcels_Model_Observer {
                 exit;
             }
             
+            $terminal_data = $terminal->getData();
+            
             $receiver = array(
                               'first_name' => $billingAddress->getData('firstname'),
                               'middle_name' => $billingAddress->getData('middlename'),
@@ -138,22 +140,20 @@ class Smartbox_Smartboxparcels_Model_Observer {
             						'receiver' => $receiver,
             						'size' => '',
                                     'warehouseId' => Mage::helper('smartbox_smartboxparcels')->getWarehouseId(),
-            						'target_machine' => $terminalId,
+            						'target_machine' => $terminal_data['_id'],
                                     'grand_total' => $grandTotal );
-            $terminal_data = $terminal->getData();
+            
 
-            $parcel_target_machine_details = array('id' => $terminalId,
+            $parcel_target_machine_details = array('id' => $terminal_data['_id'],
                                                     'address' => array(
                                                             'building_number' => $terminal_data['address'],
                                                             'city' => $terminal_data['city']
                                                             )
                                                         );
-            										
-
-            $smartbox_order_details = array('parcel_target_machine_id' => $terminalId,
+            $smartbox_order_details = array('parcel_target_machine_id' => $terminal_data['_id'],
         									'receiver_phone' =>  $billingAddress->getData('telephone'),
         									'parcel_detail' => $parcel_detail,
-        									'parcel_target_machine' => $terminalId,
+        									'parcel_target_machine' => $terminal_data['_id'],
         									'parcel_target_machine_detail' =>  $parcel_target_machine_details,
                                             'receiver_name' => $billingAddress->getData('email'));
             $data = array($quote_id => $smartbox_order_details);

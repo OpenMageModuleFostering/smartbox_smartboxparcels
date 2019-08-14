@@ -4,6 +4,8 @@ abstract class Smartbox_Smartboxparcels_Model_Api_Smartbox_Abstract extends Mage
 {
 
     const API_KEY_XML_PATH = 'carriers/smartbox_smartboxparcels/api_key';
+    const API_USERNAME_XML_PATH = 'carriers/smartbox_smartboxparcels/username';
+    const API_PASSWORD_XML_PATH = 'carriers/smartbox_smartboxparcels/password';
     const API_ENVIRONMENT_XML_PATH = 'carriers/smartbox_smartboxparcels/environment';
     const API_STAGING_XML_PATH = 'carriers/smartbox_smartboxparcels/staging_api';
     const API_PRODUCTION_XML_PATH = 'carriers/smartbox_smartboxparcels/production_api';
@@ -18,12 +20,20 @@ abstract class Smartbox_Smartboxparcels_Model_Api_Smartbox_Abstract extends Mage
 
             if(Mage::getStoreConfig(self::API_ENVIRONMENT_XML_PATH) == Smartbox_Smartboxparcels_Model_System_Config_Environment::SMARTBOX_PRODUCTION){
                 $http->setUri(Mage::getStoreConfig(self::API_PRODUCTION_XML_PATH) . $call);
-                $api_key = array('X-Api-Key' => Mage::getStoreConfig(self::API_KEY_XML_PATH));
+                $api_key = array(
+                    'X-Api-Key' => Mage::getStoreConfig(self::API_KEY_XML_PATH),
+                    'X-Api-User'=> Mage::getStoreConfig(self::API_USERNAME_XML_PATH),
+                    'X-Api-Passwd'=> Mage::getStoreConfig(self::API_PASSWORD_XML_PATH)
+                    );
                 $http->setHeaders($api_key);
             }
             else{
                 $http->setUri(Mage::getStoreConfig(self::API_STAGING_XML_PATH) . $call);
-                $api_key = array('X-Api-Key' => Mage::getStoreConfig(self::API_KEY_XML_PATH));
+                $api_key = array(
+                    'X-Api-Key' => Mage::getStoreConfig(self::API_KEY_XML_PATH),
+                    'X-Api-User'=> Mage::getStoreConfig(self::API_USERNAME_XML_PATH),
+                    'X-Api-Passwd'=> Mage::getStoreConfig(self::API_PASSWORD_XML_PATH)
+                    );
                 $http->setHeaders($api_key);
             }
 

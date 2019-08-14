@@ -25,7 +25,7 @@ class Smartbox_Smartboxparcels_Model_Api_Smartbox_Terminals extends Smartbox_Sma
             } else {
 
                 //make a request to the API
-                $http = parent::buildRequest('terminals');
+                $http = parent::buildRequest('terminalSearch');
                 $responseTerminals = parent::makeRequest($http);
                 $terminals = array();
                 foreach($responseTerminals as $terminal){
@@ -59,7 +59,7 @@ class Smartbox_Smartboxparcels_Model_Api_Smartbox_Terminals extends Smartbox_Sma
         if(!$tracking_id){
             return ;
         }
-        $http = parent::buildRequest('parcels/'.$tracking_id);
+        $http = parent::buildRequest('parcelSearch?invoiceNumber='.$tracking_id);
         
         return parent::makeRequest($http);
 
@@ -114,7 +114,7 @@ class Smartbox_Smartboxparcels_Model_Api_Smartbox_Terminals extends Smartbox_Sma
     public function getTerminal($terminalId, $returnData = false)
     {
         // Retrieve terminal from the API
-        $http = parent::buildRequest('terminals/code/' . $terminalId);
+        $http = parent::buildRequest('terminalSearch?number=' . $terminalId);
         $terminaldata = parent::makeRequest($http);
 
         // If the terminal loads and isn't false

@@ -2,7 +2,6 @@
 
 class Smartbox_Smartboxparcels_Adminhtml_SmartboxparcelsController extends Mage_Adminhtml_Controller_Action
 {
-
     protected function _initAction() {
         $this->loadLayout()
             ->_setActiveMenu('sales/smartboxparcels')
@@ -38,11 +37,11 @@ class Smartbox_Smartboxparcels_Adminhtml_SmartboxparcelsController extends Mage_
 
             if($parcelDetailDb){
 
-            $terminal = Mage::getModel('smartbox_smartboxparcels/terminal')->load($parcelDetailDb->target_machine);
+            //$terminal = Mage::getModel('smartbox_smartboxparcels/terminal')->load($parcelDetailDb->target_machine);
 			
 			
-			
-            $terminal_id = $terminal->getData()['_id'];
+			$terminal_id = $parcelDetailDb->target_machine;
+            //$terminal_id = $terminal->getData()['_id'];
 			
 			            
             $receiver_name = $parcelDetailDb->receiver->first_name;
@@ -59,11 +58,11 @@ class Smartbox_Smartboxparcels_Adminhtml_SmartboxparcelsController extends Mage_
                           'receiver_phone' => $parcelDetailDb->receiver->phone,
                           'receiverEmail' => $parcelDetailDb->receiver->email,
                           'size' => $parcelDetailDb->size,
-                          'warehouseId' => $parcelDetailDb->warehouseId,
+                          'eShopWarehouseId' => $parcelDetailDb->warehouseId,
                           'price' => $parcelDetailDb->grand_total,
                           'paymentType' => $parcelDetailDb->paymentType,
                           'paymentMethod' => $parcelDetailDb->paymentMethod,
-                          'EShop_trackingNumber' => $parcelDetailDb->EShop_trackingNumber);
+                          'invoiceNumber' => $parcelDetailDb->EShop_trackingNumber);
             
             $terminals = Mage::getSingleton('smartbox_smartboxparcels/api_smartbox_terminals');
             $result = $terminals->createParcel($body);
@@ -72,7 +71,7 @@ class Smartbox_Smartboxparcels_Adminhtml_SmartboxparcelsController extends Mage_
                 $parcel_details = $terminals->getParcelDetails($parcelDetailDb->EShop_trackingNumber);
                 
                 if($parcel_details && is_array($parcel_details)){
-                    $tracking_number = $parcel_details['trackingNumber'];
+                    $tracking_number = $parcel_details[0]['awbNumber'];
                 }
                 else{
                     $tracking_number = 'failed to fetch';
