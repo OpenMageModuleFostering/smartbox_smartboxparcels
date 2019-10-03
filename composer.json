@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/Smartbox_Smartboxparcels",
+    "name": "OpenMageModuleFostering\/Smartbox_Smartboxparcels",
     "type": "magento-module",
     "license": "Open-Software-License",
     "homepage": "",
-    "description": "Smartbox is an automated delivery solution that gives your customers the flexibility to pickup deliveries 24/7",
+    "description": "Smartbox is an automated delivery solution that gives your customers the flexibility to pickup deliveries 24\/7",
     "authors": [
-    {
-        "name": "Deepak Bhasin",
-        "email": "deepak@smartbox.in"
-    }
-],
+        {
+            "name": "Deepak Bhasin",
+            "email": "deepak@smartbox.in"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
